@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Table(name = "Order_ghost")
 public class Order {
 
     @Id

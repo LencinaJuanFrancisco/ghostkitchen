@@ -21,7 +21,7 @@ public class Delivery {
     private String licencePlate;
     
     @ManyToOne(cascade = CascadeType.REFRESH)
-    private User user;
+    private Ghost user;
     
     @OneToMany(mappedBy = "delivery")
     Set<Order> orders;
