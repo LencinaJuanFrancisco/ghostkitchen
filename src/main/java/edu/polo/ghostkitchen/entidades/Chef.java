@@ -18,7 +18,7 @@ public class Chef {
     private String schedules;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
-    private User user;
+    private Ghost user;
 
     @OneToMany(mappedBy = "chef")
     Set<Dish> dishes;

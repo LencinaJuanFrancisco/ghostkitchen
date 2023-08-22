@@ -15,7 +15,7 @@ public class Client {
     private Long id;
     
     @ManyToOne(cascade = CascadeType.REFRESH)
-    private User user;
+    private Ghost user;
 
     @OneToMany(mappedBy = "client")
     Set<Order> orders;
