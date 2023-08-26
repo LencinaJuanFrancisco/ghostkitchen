@@ -18,11 +18,14 @@ public class Chef {
     private String schedules;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
-    private Ghost user;
+    private Ghosts user;
 
     @OneToMany(mappedBy = "chef")
     Set<Dish> dishes;
     
     @OneToMany(mappedBy = "chef")
     Set<Order> orders;
+    
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    private Ghosts users;
 }
