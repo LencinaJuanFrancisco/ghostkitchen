@@ -26,27 +26,44 @@ public class SecurityConfiguration {
         
     }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests((requests) -> requests.requestMatchers("/", "/home", "/register", "/registerKitchen", "/registerDelivery", "/css/**", "/images/**").permitAll()
-                .anyRequest().authenticated()
-        )
-                .formLogin((form) -> form
-				.loginPage("/login")
-				.loginProcessingUrl("/logincheck")
-				.usernameParameter("email")
-                       		.passwordParameter("password")
-				.permitAll()
-			)
-			.logout((logout) -> logout.permitAll());
+    // @Bean
+    // public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    //     http.authorizeRequests((requests) -> requests.requestMatchers("/", "/home", "/register", "/registerKitchen", "/registerDelivery", "/css/**", "/images/**").permitAll()
+    //             .anyRequest().authenticated()
+    //     )
+    //             .formLogin((form) -> form
+	// 			.loginPage("/login")
+	// 			.loginProcessingUrl("/logincheck")
+	// 			.usernameParameter("email")
+    //                    		.passwordParameter("password")
+	// 			.permitAll()
+	// 		)
+	// 		.logout((logout) -> logout.permitAll());
         
         
 		
-        return http.build();
+    //     return http.build();
                 
+	// }
+
+    @Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http
+			.authorizeHttpRequests((requests) -> requests
+				.requestMatchers("/", "/home", "/register", "/registerKitchen", "/registerDelivery", "/css/**", "/images/**").permitAll()
+				.anyRequest().authenticated()
+			)
+			.formLogin((form) -> form
+				.loginPage("/login")
+				.loginProcessingUrl("/logincheck")
+				.usernameParameter("email")
+				.passwordParameter("password")
+				.permitAll()
+			)
+			.logout((logout) -> logout.permitAll());
+
+		return http.build();
 	}
-
-
 }
 
 

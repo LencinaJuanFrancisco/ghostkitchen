@@ -24,6 +24,8 @@ public class Dish {
     private float price;
     
     private boolean disponibility;
+
+     @Column(name = "`rank`")
     private float rank;
     
     @ManyToOne(cascade = CascadeType.REFRESH)

@@ -40,6 +40,7 @@ public class AuthControler {
         @RequestParam(name = "error", required = false) String error,
         @RequestParam(name="logout", required = false) String logout) {
             
+            System.out.println("🔥🔥🔥🔥🔥🔥🔥🔥 aca entro" );
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Iniciar sesión");
@@ -51,6 +52,7 @@ public class AuthControler {
     
     @GetMapping({"/loginSuccess"})
     public RedirectView logincheck(){
+         System.out.println("🔥🔥🔥🔥🔥🔥🔥🔥 loginSuccess" );
         return new RedirectView("/");
     }
     
@@ -72,9 +74,18 @@ public class AuthControler {
 	}
 
 	@PostMapping("/register")
-public ModelAndView registrar(@RequestParam(name="g-recaptcha-response") String recaptchaResponse, @Valid RegisterDto registerDto, BindingResult br, RedirectAttributes ra, HttpServletRequest request) {
+    public ModelAndView registrar(@RequestParam(name="g-recaptcha-response") String recaptchaResponse, @Valid RegisterDto registerDto, BindingResult br, RedirectAttributes ra, HttpServletRequest request) {
     // ... Validación de reCAPTCHA y otros controles de errores ...
+        String ip = request.getRemoteAddr();
+        
+        String captchaVerifyMessage = recaptchaService.verifyRecaptcha(ip, recaptchaResponse);
+    if (captchaVerifyMessage != "") {
+        br.rejectValue("recaptcha", "recaptcha", captchaVerifyMessage);
+    }
 
+    if ( br.hasErrors() ) {
+        return this.register(registerDto);
+    }
     // Registrar al usuario y guardar en la base de datos
     Ghosts u = new Ghosts();
     u.setAddress(registerDto.getAddress());
@@ -82,7 +93,8 @@ public ModelAndView registrar(@RequestParam(name="g-recaptcha-response") String 
     u.setEmail(registerDto.getEmail());
     u.setPassword(codificator.encode(registerDto.getPassword()));
     u.setRole(Ghosts.GhostRole.Client);
-    ghostService.register(u);
+   
+    userRepository.save(u);
 
     // Redirigir al usuario a la página de inicio de sesión
     return new ModelAndView("redirect:/login");

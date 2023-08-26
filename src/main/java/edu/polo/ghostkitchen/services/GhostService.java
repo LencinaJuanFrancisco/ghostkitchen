@@ -1,6 +1,7 @@
 package edu.polo.ghostkitchen.services;
 
 import edu.polo.ghostkitchen.entidades.*;
+import edu.polo.ghostkitchen.entidades.Ghosts;
 import edu.polo.ghostkitchen.entidades.Ghosts.GhostRole;
 import edu.polo.ghostkitchen.repositories.*;
 import jakarta.transaction.Transactional;
@@ -15,7 +16,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
 @Service
 public class GhostService implements UserDetailsService {
 
@@ -25,46 +25,34 @@ public class GhostService implements UserDetailsService {
     @Autowired
     private BCryptPasswordEncoder codificator;
 
-
-       
     @Override
-public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    Ghosts user = userRepository.findByEmail(email);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Ghosts user = userRepository.findByEmail(email);
 
-    
-      
-    if (user == null) {
-        throw new UsernameNotFoundException("Usuario no encontrado");
+        if (user == null) {
+            throw new UsernameNotFoundException("Usuario no encontrado");
+        }
+
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
+
+        return buildUser(user, authorities);
     }
 
-         
-    List<GrantedAuthority> authorities = new ArrayList<>();
- authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
+
+
+      private User buildUser(Ghosts user, Collection<? extends GrantedAuthority> authorities) {
         
-    return buildUser( user, authorities);
-}
-
-private List<GrantedAuthority> buildAuthorities(Ghosts.GhostRole role) {
-    List<GrantedAuthority> authorities = new ArrayList<>();
-    authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
-    return authorities;
-}
-
-private User buildUser(Ghosts user, List<GrantedAuthority> authorities) {
-
-    return new User(user.getEmail(), codificator.matches(rawPassword, encodedPassword)encode(user.getPassword()), authorities);
-
-
-
-    // ver 
-    // si se puede utilizar 
-    //el matches para que compare las contraseñas
+        return new User(user.getEmail(), user.getPassword(), authorities);
+    } 
     
+    public List<GrantedAuthority> buildAuthorities(Ghosts.GhostRole role) {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
+        return authorities;
+    }
 
-
-
-
-}
+  
 
     @Transactional
     public void register(Ghosts user) {
@@ -79,9 +67,6 @@ private User buildUser(Ghosts user, List<GrantedAuthority> authorities) {
         userRepository.save(user);
     }
 
-    
     // Resto de los métodos de tu servicio...
 
-   
-    
 }

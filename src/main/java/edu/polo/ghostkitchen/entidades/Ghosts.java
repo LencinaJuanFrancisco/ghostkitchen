@@ -46,7 +46,9 @@ public class Ghosts {
     @NotBlank(message = "This field is required.")
     private String password;
 
+    @Column(name = "`rank`")
     private float rank;
+
     private long history;
 
     @Temporal(TemporalType.DATE)
@@ -61,7 +63,7 @@ public class Ghosts {
     @OneToMany(mappedBy = "users")
     Set<Client> clients;
 
-    
+
     public enum GhostRole {
         Admin,
         Chef,

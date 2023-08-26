@@ -18,5 +18,6 @@ public class Detail {
     private Dish dish;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "`order`")
     private Order order;
 }
