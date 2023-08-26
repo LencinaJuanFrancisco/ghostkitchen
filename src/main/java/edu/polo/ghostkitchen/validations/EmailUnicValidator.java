@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class EmailUnicValidator implements ConstraintValidator<EmailUnic, Object> {
 
     @Autowired
-    private GhostRepository userRepository;
+    private GhostsRepository userRepository;
 
     @Override
     public void initialize(final EmailUnic constraintAnnotation) {

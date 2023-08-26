@@ -14,10 +14,13 @@ body {
 
 .navbar {
     z-index: 9999;
+   background-color: #0c0c0c !important;
+  
 }
 
 .navbar-brand {
     font-size: 35px;
+      color: #ffffff !important;
 }
 
 /* ---------------------------------------------------
@@ -55,4 +58,15 @@ body {
 
 .select2-selection__arrow {
     height: 36px !important;
+}
+
+.logo-img {
+  width: 80px; /* Ajusta el ancho del logo según tus necesidades */
+  height: auto; /* Ajusta la altura automáticamente según el ancho */
+  margin-right: 10px; /* Espacio entre el logo y el texto */
+    background-color: #000000;
+}
+
+.navbar-nav li.nav-item a.nav-link {
+  color: #ffffff;
 }
