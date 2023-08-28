@@ -11,26 +11,18 @@
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Link
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
+          <a class="nav-link active" aria-current="page" href="/menu">Menu</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Link</a>
+          <a class="nav-link active" aria-current="page" href="/perfil">Perfil</a>
         </li>
-        <li class="nav-item" sec:authorize="isAuthenticated()">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Orden</a>
+        </li>
+        <li class="nav-item ms-auto" sec:authorize="isAuthenticated()">
           <form class="form-inline" th:action="@{/logout}" method="POST">
-            <button class="btn btn-link nav-link active" type="submit" onclick="return confirm('¿Seguro de cerrar sesión?')">
-              <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+            <button class="btn btn-link nav-link active text-white" type="submit" onclick="return confirm('¿Seguro de cerrar sesión?')">
+              <i class="fa-solid text-white fa-right-from-bracket"></i> Cerrar sesión
             </button>
           </form>
         </li>
@@ -45,10 +37,7 @@
           </a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+     
     </div>
   </div>
 </nav>
