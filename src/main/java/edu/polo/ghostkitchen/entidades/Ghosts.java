@@ -65,9 +65,9 @@ public class Ghosts {
 
 
     public enum GhostRole {
-        Admin,
+        Administrador,
         Chef,
-        Client,
+        Cliente,
         Delivery,
     }
 }

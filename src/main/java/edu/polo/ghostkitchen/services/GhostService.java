@@ -62,7 +62,7 @@ public class GhostService implements UserDetailsService {
         user.setPassword(codificator.encode(user.getPassword()));
         // Asignar un rol predeterminado en el momento del registro si es necesario.
         if (user.getRole() == null) {
-            user.setRole(Ghosts.GhostRole.Client);
+            user.setRole(Ghosts.GhostRole.Cliente);
         }
         userRepository.save(user);
     }

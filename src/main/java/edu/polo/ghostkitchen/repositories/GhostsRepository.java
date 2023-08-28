@@ -11,4 +11,5 @@ public interface GhostsRepository extends JpaRepository<Ghosts, Long> {
     
     boolean existsByEmail(String email);
     
+      boolean existsByRole(Ghosts.GhostRole role);
 }
