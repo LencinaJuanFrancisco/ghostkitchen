@@ -30,13 +30,33 @@ public class HomeController {
         return maw;  
     }
 
-    @RequestMapping("/ejemplo")
-    public ModelAndView ejemplo()
+    @RequestMapping("/menu")
+    public ModelAndView menu()
     {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
-        maw.addObject("titulo", "Ejemplo");
-        maw.addObject("vista", "inicio/ejemplo");
+        maw.addObject("titulo", "menu");
+        maw.addObject("vista", "inicio/menu");
+        return maw;  
+    }
+
+    @RequestMapping("/perfil")
+    public ModelAndView perfil()
+    {
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("fragments/base");
+        maw.addObject("titulo", "perfil");
+        maw.addObject("vista", "inicio/perfil");
+        return maw;  
+    }
+
+    @RequestMapping("/dishdetail")
+    public ModelAndView dishdetail()
+    {
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("fragments/base");
+        maw.addObject("titulo", "dishdetail");
+        maw.addObject("vista", "inicio/dishdetail");
         return maw;  
     }
 }
