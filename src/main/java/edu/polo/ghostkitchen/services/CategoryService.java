@@ -12,11 +12,9 @@ public class CategoryService {
     @Autowired
     CategoryRepository categoryRepository;
 
-    public List<Category> getAll() {
-        List<Category> lista = new ArrayList<Category>();
-        categoryRepository.findAll().forEach(registro -> lista.add(registro));
-        return lista;
-    }
+   public List<Category> getAll() {
+    return (List<Category>) categoryRepository.findAll();
+}
     
     public Category getById(Long id) {
         return categoryRepository.findById(id).get();

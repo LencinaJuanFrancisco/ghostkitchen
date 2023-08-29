@@ -55,10 +55,10 @@ public class AuthControler {
         return new RedirectView("/");
     }
 
-    @GetMapping({"/home"})
+   /* @GetMapping({"/home"})
     public RedirectView login() {
         return new RedirectView("/");
-    }
+    }*/
 
     @GetMapping("/register")
     public ModelAndView register(RegisterDto registerDto) {
