@@ -18,7 +18,7 @@ public class Category {
     @NotNull
     @NotBlank(message = "This field is required.")
     @Size(max = 200, message = "{0} is too long.")
-    private String name;
+    private String category;
     private String description;
 
     @OneToMany(mappedBy = "category")
