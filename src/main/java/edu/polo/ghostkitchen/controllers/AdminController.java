@@ -64,7 +64,7 @@ public class AdminController implements WebMvcConfigurer {
         categoryRepository.save(u);
 
         // Redirigir al usuario a alguna página después del registro exitoso
-        return new ModelAndView("redirect:/home");
+        return new ModelAndView("redirect:/");
     }
     /*
 @GetMapping

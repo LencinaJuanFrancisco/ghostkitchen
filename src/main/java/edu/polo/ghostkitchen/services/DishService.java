@@ -2,6 +2,9 @@ package edu.polo.ghostkitchen.services;
 
 import edu.polo.ghostkitchen.entidades.*;
 import edu.polo.ghostkitchen.repositories.*;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +32,9 @@ public class DishService {
     
     public Dish getByPrice(Long price) {
         return dishRepository.findByPrice(price);
+    }
+
+    public List<Dish> getAll() {
+        return (List<Dish>) dishRepository.findAll();
     }
 }

@@ -3,19 +3,23 @@ package edu.polo.ghostkitchen.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
+
+
 import org.springframework.web.servlet.ModelAndView;
+
 
 import edu.polo.ghostkitchen.services.OrderService;
 import edu.polo.ghostkitchen.entidades.Detail;
 import	edu.polo.ghostkitchen.entidades.Order;
 
-@RequestMapping()
+@Controller
 public class OrderController {
     
     
@@ -26,17 +30,19 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/allOrders")
     public List<Order> getAllOrders() {
         return orderService.getAllOrders();
     }
 
-    @RequestMapping("/orden")
-    public ModelAndView orden() {
+
+
+     @GetMapping("/pedido")
+    public ModelAndView pedido() {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Orden");
-        maw.addObject("vista", "orden/order");
+        maw.addObject("vista", "orden/order-details");
         return maw;
     }
 
@@ -49,7 +55,7 @@ public class OrderController {
             order.addDetail(detail);
             orderService.createOrder(order);
         }
-        return "redirect:/orders/" + orderId; // Redirigir a la página de detalles de la orden
+        return "redirect:/pedido/" + orderId; // Redirigir a la página de detalles de la orden
     }
 
     @PostMapping("/{orderId}/remove-detail")
