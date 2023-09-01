@@ -20,9 +20,10 @@ public class Dish {
     @NotBlank(message = "This field is required.")
     @Size(max = 30, message = "{0} is too long.")
     private String name;
-    private String description;
-    private float price;
+    private Long price;
 
+    private String description;
+    
     private boolean disponibility;
 
     @Column(name = "`rank`")

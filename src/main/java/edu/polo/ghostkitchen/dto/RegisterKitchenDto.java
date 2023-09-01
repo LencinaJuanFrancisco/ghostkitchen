@@ -6,6 +6,7 @@ import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.*;
 import java.util.Date;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 @Data
 @Confirm

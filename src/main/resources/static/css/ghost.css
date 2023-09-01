@@ -85,3 +85,9 @@ body::before {
 .navbar-nav li.nav-item a.nav-link {
     color: #ffffff;
 }
+
+/* Estilos personalizados para el checkbox */
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    width: 60px; /* Ancho personalizado */
+    height: 60px; /* Alto personalizado */
+}
