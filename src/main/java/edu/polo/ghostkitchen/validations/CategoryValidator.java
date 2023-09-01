@@ -17,8 +17,8 @@ public class CategoryValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         CategoryDto categoryDto = (CategoryDto) target;
-        
+
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "category", "field.required");
-        // Agrega más validaciones según tus necesidades
+
     }
 }

@@ -19,12 +19,20 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Orden</a>
                 </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/createDish">Crear plato</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categorías
                     </a>
                     <ul class="dropdown-menu">
+<<<<<<< HEAD
+                        <li th:each="cate : ${allcategory}">
+=======
                         <li th:each=" cate: ${allcategory}">
+>>>>>>> devs
                             <a class="dropdown-item" href="#" th:text="${cate.category}"></a>
                         </li>
                         <li><hr class="dropdown-divider"></li>

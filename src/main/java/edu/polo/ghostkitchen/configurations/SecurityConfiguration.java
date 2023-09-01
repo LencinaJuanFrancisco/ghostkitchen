@@ -9,25 +9,36 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
- 
-        @Autowired
-    private BCryptPasswordEncoder codificator;
-        
+
     @Autowired
     private GhostService userService;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
-        
+
     }
 
-
     @Bean
+<<<<<<< HEAD
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests((requests) -> requests
+                .requestMatchers("/", "/categories", "/home", "/menu", "/register", "/dishdetail", "/createcategory", "/perfil", "/registerKitchen", "/registerDelivery", "/css/**", "/images/**", "/createDish").permitAll()
+                .anyRequest().authenticated()
+                )
+                .formLogin((form) -> form
+                .loginPage("/login")
+                .loginProcessingUrl("/logincheck")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .permitAll()
+                )
+                .logout((logout) -> logout.permitAll());
+=======
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((requests) -> requests
@@ -42,11 +53,9 @@ public class SecurityConfiguration {
 				.permitAll()
 			)
 			.logout((logout) -> logout.permitAll());
+>>>>>>> devs
 
-		return http.build();
-	}
+        return http.build();
+
+    }
 }
-
-
-
-

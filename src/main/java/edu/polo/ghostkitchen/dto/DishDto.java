@@ -6,14 +6,19 @@ import lombok.*;
 
 @Data
 @Confirm
-public class CategoryDto {
+public class DishDto {
 
     @NotNull
-    @NotEmpty(message = "Ingrese una categoría")
-    private String category;
+    @NotEmpty(message = "Ingrese un nombre para el plato")
+    private String name;
 
-    @NotNull
-    @NotEmpty(message = "Ingrese una descripción")
+  
     private String description;
+
+    private Long price;
+ 
+    private float rank;
+    
+    private boolean disponibility;
 
 }

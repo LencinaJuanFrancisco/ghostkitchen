@@ -2,7 +2,6 @@ package edu.polo.ghostkitchen.services;
 
 import edu.polo.ghostkitchen.entidades.*;
 import edu.polo.ghostkitchen.repositories.*;
-import java.util.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
@@ -10,23 +9,14 @@ import org.springframework.stereotype.*;
 public class ChefService {
 
     @Autowired
-    ChefRepository chefRepository;
+    private ChefRepository chefRepository;
 
-    public List<Chef> getAll() {
-        List<Chef> lista = new ArrayList<Chef>();
-        chefRepository.findAll().forEach(registro -> lista.add(registro));
-        return lista;
-    }
-    
     public Chef getById(Long id) {
-        return chefRepository.findById(id).get();
+        return chefRepository.findById(id).orElse(null);
     }
-    
-    public void save(Chef chef) {
-        chefRepository.save(chef);
+
+    public Chef getByWeb(String web) {
+        return chefRepository.findByWeb(web);
     }
-    
-    public void delete(Long id){
-        chefRepository.deleteById(id);
-    }
+
 }

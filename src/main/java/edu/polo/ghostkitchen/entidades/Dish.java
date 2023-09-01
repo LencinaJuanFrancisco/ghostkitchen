@@ -20,20 +20,21 @@ public class Dish {
     @NotBlank(message = "This field is required.")
     @Size(max = 30, message = "{0} is too long.")
     private String name;
+    private Long price;
+
     private String description;
-    private float price;
     
     private boolean disponibility;
 
-     @Column(name = "`rank`")
+    @Column(name = "`rank`")
     private float rank;
-    
+
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Chef chef;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Category category;
-    
+
     @OneToMany(mappedBy = "dish")
     Set<Detail> details;
 }

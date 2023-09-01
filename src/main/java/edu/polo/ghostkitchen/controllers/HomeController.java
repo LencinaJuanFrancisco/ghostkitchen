@@ -35,8 +35,9 @@ public class HomeController {
     public ModelAndView menu() {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
-        maw.addObject("titulo", "menu");
+        maw.addObject("titulo", "Menú");
         maw.addObject("vista", "inicio/menu");
+        maw.addObject("allcategory", categoryService.getAll());
         return maw;
     }
 
@@ -44,8 +45,9 @@ public class HomeController {
     public ModelAndView perfil() {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
-        maw.addObject("titulo", "perfil");
+        maw.addObject("titulo", "Perfil");
         maw.addObject("vista", "inicio/perfil");
+        maw.addObject("allcategory", categoryService.getAll());
         return maw;
     }
 
@@ -55,6 +57,7 @@ public class HomeController {
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "dishdetail");
         maw.addObject("vista", "inicio/dishdetail");
+        maw.addObject("allcategory", categoryService.getAll());
         return maw;
     }
 }

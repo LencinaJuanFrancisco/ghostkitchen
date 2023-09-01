@@ -13,12 +13,9 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Ghosts user;
-    
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    private Ghosts users;
 
     @OneToMany(mappedBy = "client")
     Set<Order> orders;
