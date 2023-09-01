@@ -1,0 +1,41 @@
+<div class="container my-auto p-3" th:fragment="contenido"></div>
+    <div class="container mt-4">
+        <h1>Lista de Órdenes</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Pedido</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr th:each="order : ${orders}">
+                    <td th:text="${order.id}"></td>
+                    <td th:text="${order.state}"></td>
+                    <td th:text="${order.price}"></td>
+                    <td>
+                        <a th:href="@{'/orders/' + ${order.id}}" class="btn btn-info btn-sm">Ver Orden</a>
+                    </td>
+                </tr> -->
+                <tr >
+                    <td >1</td>
+                    <td >Pizza</td>
+                    <td >123</td>
+                    <td>
+                        <a href="order-details.html"> Orden</a>
+                    </td>
+                </tr>
+                <tr >
+                    <td >2</td>
+                    <td >Hamburgueza</td>
+                    <td >123</td>
+                    <td>
+                        <a href="order-details.html"> Orden</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
