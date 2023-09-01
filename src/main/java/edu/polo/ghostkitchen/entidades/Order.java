@@ -27,6 +27,18 @@ public class Order {
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Client client;
 
-    @OneToMany(mappedBy = "order")
-    Set<Detail> details;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Detail> details = new HashSet<>();
+
+
+    // Método para agregar un plato a la orden
+    public void addDetail(Detail detail) {
+        detail.setOrder(this);
+        details.add(detail);
+    }
+
+    // Método para eliminar un palto de la orden por ID
+    public void removeDetailById(Long detailId) {
+        details.removeIf(detail -> detail.getId().equals(detailId));
+    }
 }
