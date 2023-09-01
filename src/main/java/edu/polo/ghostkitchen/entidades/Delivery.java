@@ -19,13 +19,11 @@ public class Delivery {
     @NotBlank(message = "This field is required.")
     @Size(max = 30, message = "{0} is too long.")
     private String licencePlate;
-    
+
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Ghosts user;
-    
+
     @OneToMany(mappedBy = "delivery")
     Set<Order> orders;
-    
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    private Ghosts users;
+
 }

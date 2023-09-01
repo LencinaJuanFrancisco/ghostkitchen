@@ -22,18 +22,18 @@ public class Dish {
     private String name;
     private String description;
     private float price;
-    
+
     private boolean disponibility;
 
-     @Column(name = "`rank`")
+    @Column(name = "`rank`")
     private float rank;
-    
+
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Chef chef;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Category category;
-    
+
     @OneToMany(mappedBy = "dish")
     Set<Detail> details;
 }

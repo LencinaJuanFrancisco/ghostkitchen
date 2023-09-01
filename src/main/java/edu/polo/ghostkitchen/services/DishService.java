@@ -17,16 +17,16 @@ public class DishService {
         dishRepository.findAll().forEach(registro -> lista.add(registro));
         return lista;
     }
-    
+
     public Dish getById(Long id) {
         return dishRepository.findById(id).get();
     }
-    
+
     public void save(Dish dish) {
         dishRepository.save(dish);
     }
-    
-    public void delete(Long id){
+
+    public void delete(Long id) {
         dishRepository.deleteById(id);
     }
 }

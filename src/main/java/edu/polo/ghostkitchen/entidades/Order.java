@@ -20,10 +20,10 @@ public class Order {
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Chef chef;
-    
+
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Delivery delivery;
-    
+
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Client client;
 

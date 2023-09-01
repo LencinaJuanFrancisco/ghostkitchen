@@ -5,6 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ChefRepository extends CrudRepository<Chef, Long>{
-    
+public interface ChefRepository extends CrudRepository<Chef, Long> {
+
+    Chef findByWeb(String web);
+
 }

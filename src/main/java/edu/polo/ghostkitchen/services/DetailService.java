@@ -17,16 +17,16 @@ public class DetailService {
         detailRepository.findAll().forEach(registro -> lista.add(registro));
         return lista;
     }
-    
+
     public Detail getById(Long id) {
         return detailRepository.findById(id).get();
     }
-    
+
     public void save(Detail detail) {
         detailRepository.save(detail);
     }
-    
-    public void delete(Long id){
+
+    public void delete(Long id) {
         detailRepository.deleteById(id);
     }
 }

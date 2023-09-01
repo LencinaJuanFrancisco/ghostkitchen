@@ -7,14 +7,13 @@ import lombok.*;
 @Data
 @Confirm
 public class CategoryDto {
-    
+
     @NotNull
     @NotEmpty(message = "Ingrese una categoría")
     private String category;
-    
+
     @NotNull
     @NotEmpty(message = "Ingrese una descripción")
     private String description;
-    
-    
+
 }

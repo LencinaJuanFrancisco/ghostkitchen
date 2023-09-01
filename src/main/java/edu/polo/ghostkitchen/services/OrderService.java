@@ -17,16 +17,16 @@ public class OrderService {
         orderRepository.findAll().forEach(registro -> lista.add(registro));
         return lista;
     }
-    
+
     public Order getById(Long id) {
         return orderRepository.findById(id).get();
     }
-    
+
     public void save(Order order) {
         orderRepository.save(order);
     }
-    
-    public void delete(Long id){
+
+    public void delete(Long id) {
         orderRepository.deleteById(id);
     }
 }
