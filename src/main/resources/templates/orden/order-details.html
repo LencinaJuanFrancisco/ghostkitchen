@@ -1,0 +1,23 @@
+<div class="container my-auto p-3" th:fragment="contenido"></div>
+<body>
+    <div class="container mt-4">
+        <h1>Detalles de la Orden</h1>
+        <table class="table">
+            <tr>
+                <th>ID:</th>
+                <!-- <td th:text="${order.id}"></td> -->
+            </tr>
+            <tr>
+                <th>Estado:</th>
+                <!-- <td th:text="${order.state}"></td> -->
+            </tr>
+            <tr>
+                <th>Precio:</th>
+                <!-- <td th:text="${order.price}"></td> -->
+            </tr>
+            <!-- Agregar más detalles de la orden según tu modelo de datos -->
+        </table>
+        <!-- <a th:href="@{'/orders'}" class="btn btn-secondary">Volver a la lista de órdenes</a> -->
+        <a href="order.html" class="btn btn-secondary">Volver a la lista de órdenes</a>
+    </div>
+ 
