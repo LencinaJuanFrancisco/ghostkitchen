@@ -80,7 +80,7 @@ public class NewDishController {
 
         }
         ra.addFlashAttribute("message", "Plato creado exitosamente");
-        return new ModelAndView("redirect:/login");
+        return new ModelAndView("redirect:/menu");
     }
 
 }
