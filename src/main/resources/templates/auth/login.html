@@ -9,8 +9,7 @@
                 </div>
                 <form class="card-body" th:action="@{/logincheck}" method="POST">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    <!-- Verificar si hay un mensaje en los atributos flash -->
-                    <div th:if="${message}" class="alert alert-success mt-3">
+                    <div th:if="${message}" class="alert alert-success mt-3 d-flex justify-content-center">
                         <p th:text="${message}"></p>
                     </div>
                     <div class="mb-3">

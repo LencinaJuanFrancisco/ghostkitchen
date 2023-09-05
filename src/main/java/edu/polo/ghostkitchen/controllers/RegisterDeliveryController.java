@@ -14,6 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import edu.polo.ghostkitchen.services.CategoryService;
 import jakarta.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
 
 @Controller
 public class RegisterDeliveryController {
@@ -30,6 +34,13 @@ public class RegisterDeliveryController {
     @Autowired
     private GhostsRepository userRepository;
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
+    
     @GetMapping("/registerDelivery")
     public ModelAndView registerDelivery(RegisterDeliveryDto registerDto) {
         ModelAndView maw = new ModelAndView();
@@ -42,7 +53,7 @@ public class RegisterDeliveryController {
     }
 
     @PostMapping("/registerDelivery")
-    public ModelAndView registrarDelivery(@RequestParam(name = "g-recaptcha-response") String recaptchaResponse, @Valid RegisterDto registerDto, @Valid RegisterDeliveryDto registerDeliveryDto, BindingResult br, RedirectAttributes ra, HttpServletRequest request) {
+    public ModelAndView registrarDelivery(@RequestParam(name = "g-recaptcha-response") String recaptchaResponse, @Valid RegisterDto registerDto,Date birthday, @Valid RegisterDeliveryDto registerDeliveryDto, BindingResult br, RedirectAttributes ra, HttpServletRequest request) {
 
         if (br.hasErrors()) {
 

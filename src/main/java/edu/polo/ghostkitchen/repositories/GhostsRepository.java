@@ -15,4 +15,6 @@ public interface GhostsRepository extends JpaRepository<Ghosts, Long> {
 
     Ghosts findById(long id);
 
+  
+
 }

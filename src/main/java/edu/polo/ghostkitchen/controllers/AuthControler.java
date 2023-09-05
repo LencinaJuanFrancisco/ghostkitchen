@@ -16,8 +16,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import java.util.Date;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.WebDataBinder;
 
 @Controller
@@ -43,7 +46,7 @@ public class AuthControler {
     }
 
     @GetMapping("/login")
-    public ModelAndView showLoginForm(Model model,
+    public ModelAndView showLoginForm(HttpSession session,Model model,
             @RequestParam(name = "error", required = false) String error,
             @RequestParam(name = "logout", required = false) String logout) {
 
@@ -54,6 +57,14 @@ public class AuthControler {
         model.addAttribute("error", error);
         model.addAttribute("logout", logout);
         maw.addObject("allcategory", categoryService.getAll());
+        
+      
+//        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+//        Ghosts user = userRepository.findByUsername(username);
+//        session.setAttribute("usuario", user);
+//          System.out.println(user + "Y ESTO ES SESION: " + session);
+//    
+      
         return maw;
     }
 
