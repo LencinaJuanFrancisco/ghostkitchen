@@ -1,34 +1,42 @@
-<!-- <!DOCTYPE html >
-<html lang="en" th:fragment="menu">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Menu</title>
-    <style>
-        .bd-placeholder-img {
-          font-size: 1.125rem;
-          text-anchor: middle;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          user-select: none;
-        }
-  
-        @media (min-width: 768px) {
-          .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-          }
-        }
-      </style>
-    
-</head> -->
 <body th:fragment="contenido">
+
+  <main class="container py-5">
+    <h1 class="text-center text-light z-3">Menú - Todos</h1>
     <div th:if="${message}" class="alert alert-success mt-3 d-flex justify-content-center">
         <p th:text="${message}"></p>
     </div>
     <main class="container py-5">
         <h1 class="text-center text-light z-3">Menú - Todos</h1>
 
+
+    <hr class="my-5" />
+
+
+    <div class="row" data-masonry='{"percentPosition": true }'>
+      <div class="col-sm-6 col-lg-4 mb-4" th:each="dihs : ${allDishes}">
+        <form th:action="@{'/pedido/' + ${dihs.id} }" th:object="${dish}"  method="POST">
+          
+          <div class="card mb-3 w-50">
+            <img
+              src="https://assets.delirec.com/images%2FeoOvaVL8h1UVOPY8FHH39BSwtep2%2Frecipe%2F2d4a6707-2e63-4137-8b26-cf900d6bb36d-Comida-divertida-palha%C3%A7o--gallery-0"
+              class="card-img-top rounded-image"
+              alt="Producto Sugerido 4"
+            />
+            <div class="card-body">
+              <h5 class="card-title" th:text="${dihs.name}"></h5>
+              <p class="card-text">
+                Descripción del cuarto producto sugerido...
+              </p>
+              <p class="card-text" th:text="${dihs.price}"></p>
+              <input type="number" name="cantidad" min="1" max="5" width="30px" value="1" />
+              
+              <button type="submit" class="btn btn-primary">Pedir</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
 
         <hr class="my-5">
 
@@ -62,8 +70,9 @@
 </body> 
 <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
 </body>
-</html> -->
+
 <div th:fragment="script">
-    <!-- Contenido del script -->
+  <!-- Contenido del script -->
 </div>
