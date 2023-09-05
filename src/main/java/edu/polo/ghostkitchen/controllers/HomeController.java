@@ -5,13 +5,15 @@ import edu.polo.ghostkitchen.services.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 @RestController
 public class HomeController {
 
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    GhostsRepository userRepository;
 
     @Autowired
     DishService dishService;
@@ -27,7 +29,12 @@ public class HomeController {
         long random = (long) ((Math.random() * (cursoRepositorio.count() - 1)) + 1);
         maw.addObject("curso", cursoServicio.getById(random));
          */
-        //System.out.println( SecurityContextHolder.getContext().getAuthentication().getName() );
+
+//        System.out.println( "QUE ES ESTO?" + (SecurityContextHolder.getContext().getAuthentication().getName()) );
+//        String user = SecurityContextHolder.getContext().getAuthentication().getName();
+//        Ghosts userFind = userRepository.findByEmail(user);
+//      
+//        System.out.println(userFind);
         return maw;
     }
 

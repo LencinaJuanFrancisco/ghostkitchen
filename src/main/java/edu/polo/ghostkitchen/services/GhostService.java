@@ -22,7 +22,7 @@ public class GhostService implements UserDetailsService {
 
     @Autowired
     private BCryptPasswordEncoder codificator;
-
+    
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Ghosts user = userRepository.findByEmail(email);
@@ -40,6 +40,8 @@ public class GhostService implements UserDetailsService {
     public Ghosts getById(Long id) {
         return userRepository.findById(id).get();
     }
+    
+
 
     private User buildUser(Ghosts user, Collection<? extends GrantedAuthority> authorities) {
 

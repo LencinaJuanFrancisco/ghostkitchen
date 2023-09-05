@@ -18,5 +18,9 @@ public class ChefService {
     public Chef getByWeb(String web) {
         return chefRepository.findByWeb(web);
     }
+    
+    public Chef findChefsByUserId(Long userId) {
+        return chefRepository.findChefsByUserId(userId);
+    }
 
 }
