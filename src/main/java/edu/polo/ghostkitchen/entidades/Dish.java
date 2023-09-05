@@ -23,11 +23,14 @@ public class Dish {
     private Long price;
 
     private String description;
-    
+
     private boolean disponibility;
 
     @Column(name = "`rank`")
     private float rank;
+
+    @Column(name = "image")
+    private String image;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Chef chef;

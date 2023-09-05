@@ -12,24 +12,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 import org.springframework.web.servlet.ModelAndView;
+
 
 import edu.polo.ghostkitchen.services.DishService;
 import edu.polo.ghostkitchen.services.OrderService;
 import edu.polo.ghostkitchen.entidades.Detail;
 import edu.polo.ghostkitchen.entidades.Dish;
 import	edu.polo.ghostkitchen.entidades.Order;
+import edu.polo.ghostkitchen.entidades.Detail;
+import edu.polo.ghostkitchen.entidades.Order;
+import edu.polo.ghostkitchen.services.CategoryService;
+
 
 
 @Controller
 public class OrderController {
-    
-    
+
     private final OrderService orderService;
 
     @Autowired
     private DishService dishService; 
+
+     @Autowired
+    private CategoryService categoryService;
+
 
     @Autowired
     public OrderController(OrderService orderService) {
@@ -41,9 +48,7 @@ public class OrderController {
 
 
 
-
-
-     @GetMapping("/pedido")
+    @GetMapping("/pedido")
     public ModelAndView pedido() {
        
         ModelAndView maw = new ModelAndView();
@@ -86,6 +91,17 @@ public class OrderController {
 
             // Agregar el objeto Dish a la lista
             dishList.add(newDish);
+        maw.addObject("allcategory", categoryService.getAll());
+        return maw;
+    }
+
+    @PostMapping("/{orderId}/add-detail")
+    public String addDetailToOrder(@PathVariable Long orderId, @ModelAttribute Detail detail) {
+        Order order = orderService.getOrderById(orderId);
+        if (order != null) {
+            // Agregar el detalle a la orden
+            order.addDetail(detail);
+            orderService.createOrder(order);
         }
         
        
@@ -99,6 +115,7 @@ public class OrderController {
         dishList.clear();
         return "redirect:/menu"; // Redirige a la página deseada después de vaciar la lista
     }
+
 
     @GetMapping("/pedido/eliminarDish/{id}")
     public String eliminarDish(@PathVariable Long id) {

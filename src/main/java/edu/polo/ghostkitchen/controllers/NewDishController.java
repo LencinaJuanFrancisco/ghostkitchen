@@ -1,5 +1,6 @@
 package edu.polo.ghostkitchen.controllers;
 
+import org.springframework.web.multipart.MultipartFile;
 import edu.polo.ghostkitchen.dto.CategoryDto;
 import edu.polo.ghostkitchen.dto.DishDto;
 import edu.polo.ghostkitchen.dto.RegisterKitchenDto;
@@ -8,7 +9,9 @@ import edu.polo.ghostkitchen.repositories.*;
 import edu.polo.ghostkitchen.services.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,15 +32,18 @@ public class NewDishController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    
+    @Autowired
+    private GhostsRepository userRepository;
+
+    @Autowired
+    private ChefRepository chefRepository;
+
     private CategoryDto categoryDto;
 
- 
     private DishDto dishDto;
-    
-  
+
     private RegisterKitchenDto registerKitchenDto;
-    
+
     @Autowired
     private CategoryService categoryService;
 
@@ -49,33 +55,35 @@ public class NewDishController {
         maw.addObject("vista", "dish/createDish");
         maw.addObject("dishDto", dishDto);
         maw.addObject("allcategory", categoryService.getAll());
+        List<Category> allCategories = categoryService.getAll(); // Reemplaza "Category" con el nombre de tu entidad de categoría
+        maw.addObject("allCategories", allCategories);
         return maw;
     }
 
     @PostMapping("/createDish")
-    public ModelAndView creationDish(@Valid DishDto dishDto, BindingResult br, RedirectAttributes ra, HttpServletRequest request) {
+    public ModelAndView creationDish(@RequestParam("archivo") MultipartFile archivo, @Valid DishDto dishDto, BindingResult br, RedirectAttributes ra, HttpServletRequest request) {
+
+        if (archivo.isEmpty()) {
+            br.reject("archivo", "Por favor, cargue una imagen");
+        }
 
         if (br.hasErrors()) {
 
         } else {
-
-//            Chef ch = new Chef();
-//            ch.setWeb(registerKitchenDto.getWeb());
-//            ch.setSchedules(registerKitchenDto.getSchedules());
-//
-        //    Category c = new Category();
-        //    c.setCategory(categoryDto.getCategory());
-        //    c.setDescription(categoryDto.getDescription());
-        //    categoryRepository.save(c);
 
             Dish d = new Dish();
             d.setName(dishDto.getName());
             d.setPrice(dishDto.getPrice());
             d.setRank(dishDto.getRank());
             d.setDisponibility(dishDto.isDisponibility());
-            
-         //   d.setCategory(c);
-         //   d.setChef(ch);
+            d.setCategory(dishDto.getCategory());
+            d.setDescription(dishDto.getDescription());
+
+            String user = SecurityContextHolder.getContext().getAuthentication().getName();
+            Ghosts userFind = userRepository.findByEmail(user);
+            Chef chefFind = chefRepository.findChefsByUserId(userFind.getId());
+            d.setChef(chefFind);
+
             dishRepository.save(d);
 
         }
@@ -84,5 +92,3 @@ public class NewDishController {
     }
 
 }
-
-
