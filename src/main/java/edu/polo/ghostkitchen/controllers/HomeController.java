@@ -38,6 +38,7 @@ public class HomeController {
         maw.addObject("titulo", "Menú");
         maw.addObject("vista", "inicio/menu");
         maw.addObject("allcategory", categoryService.getAll());
+        maw.addObject("allDishes", dishService.getAll());
         return maw;
     }
 

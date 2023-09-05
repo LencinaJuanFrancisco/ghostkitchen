@@ -63,17 +63,17 @@ public class NewDishController {
 //            ch.setWeb(registerKitchenDto.getWeb());
 //            ch.setSchedules(registerKitchenDto.getSchedules());
 //
-//            Category c = new Category();
-//            c.setCategory(categoryDto.getCategory());
-//            c.setDescription(categoryDto.getDescription());
-//
-//            categoryRepository.save(c);
+        //    Category c = new Category();
+        //    c.setCategory(categoryDto.getCategory());
+        //    c.setDescription(categoryDto.getDescription());
+        //    categoryRepository.save(c);
 
             Dish d = new Dish();
             d.setName(dishDto.getName());
             d.setPrice(dishDto.getPrice());
             d.setRank(dishDto.getRank());
             d.setDisponibility(dishDto.isDisponibility());
+            
          //   d.setCategory(c);
          //   d.setChef(ch);
             dishRepository.save(d);

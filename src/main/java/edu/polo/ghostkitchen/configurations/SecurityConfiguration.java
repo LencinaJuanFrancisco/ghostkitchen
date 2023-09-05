@@ -23,26 +23,11 @@ public class SecurityConfiguration {
     }
 
     @Bean
-<<<<<<< HEAD
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/", "/categories", "/home", "/menu", "/register", "/dishdetail", "/createcategory", "/perfil", "/registerKitchen", "/registerDelivery", "/css/**", "/images/**", "/createDish").permitAll()
-                .anyRequest().authenticated()
-                )
-                .formLogin((form) -> form
-                .loginPage("/login")
-                .loginProcessingUrl("/logincheck")
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .permitAll()
-                )
-                .logout((logout) -> logout.permitAll());
-=======
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/","/categories", "/home","/orden", "/menu","/register","/dishdetail", "/createcategory","/perfil","/registerKitchen", "/registerDelivery", "/css/**", "/images/**").permitAll()
+				.requestMatchers("/","/categories", "/home","/pedido", "/menu","/register","/dishdetail","/createDish", "/createcategory","/perfil","/registerKitchen", "/registerDelivery", "/css/**", "/images/**")
+				.permitAll()
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form
@@ -53,7 +38,6 @@ public class SecurityConfiguration {
 				.permitAll()
 			)
 			.logout((logout) -> logout.permitAll());
->>>>>>> devs
 
         return http.build();
 
