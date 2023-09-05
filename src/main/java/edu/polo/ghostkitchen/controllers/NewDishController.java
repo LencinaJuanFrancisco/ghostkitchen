@@ -61,15 +61,9 @@ public class NewDishController {
     }
 
     @PostMapping("/createDish")
-    public ModelAndView creationDish(@RequestParam("archivo") MultipartFile archivo, @Valid DishDto dishDto, BindingResult br, RedirectAttributes ra, HttpServletRequest request) {
+    public ModelAndView creationDish(@Valid DishDto dishDto, BindingResult br, RedirectAttributes ra, HttpServletRequest request) {
 
-        if (archivo.isEmpty()) {
-            br.reject("archivo", "Por favor, cargue una imagen");
-        }
 
-        if (br.hasErrors()) {
-
-        } else {
 
             Dish d = new Dish();
             d.setName(dishDto.getName());
@@ -86,7 +80,7 @@ public class NewDishController {
 
             dishRepository.save(d);
 
-        }
+        
         ra.addFlashAttribute("message", "Plato creado exitosamente");
         return new ModelAndView("redirect:/menu");
     }

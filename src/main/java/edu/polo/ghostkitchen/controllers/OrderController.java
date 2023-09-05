@@ -29,14 +29,13 @@ import edu.polo.ghostkitchen.services.CategoryService;
 @Controller
 public class OrderController {
 
-    private final OrderService orderService;
+   private final OrderService orderService;
 
+   @Autowired
+    private CategoryService categoryService;
+   
     @Autowired
     private DishService dishService; 
-
-     @Autowired
-    private CategoryService categoryService;
-
 
     @Autowired
     public OrderController(OrderService orderService) {
@@ -48,29 +47,20 @@ public class OrderController {
 
 
 
-    @GetMapping("/pedido")
-    public ModelAndView pedido() {
-       
-        ModelAndView maw = new ModelAndView();
-        
-        maw.setViewName("fragments/base");
-        maw.addObject("titulo", "Orden");
-        maw.addObject("vista", "orden/order-details");
-        maw.addObject("allOrders", dishList);
-
-        // if (dishList.isEmpty()) {
-        //      maw.addObject("noElements", true);
-        // } else {
-        //     maw.addObject("noElements", false);
-        //     maw.addObject("allOrders", dishList);
-        // }
-        return maw;
-    }
+   @GetMapping("/pedido")
+public ModelAndView pedido() {
+    ModelAndView modelAndView = new ModelAndView("fragments/base");
+    modelAndView.addObject("titulo", "Orden");
+    modelAndView.addObject("vista", "orden/order-details");
+    modelAndView.addObject("allOrders", dishList);
+    modelAndView.addObject("carritoVacio", dishList.isEmpty());
+     modelAndView.addObject("allcategory", categoryService.getAll());
+    return modelAndView;
+}
 
 
    
-
-    @PostMapping("/pedido/{dishId}")
+@PostMapping("/pedido/{dishId}")
     public String addDetailToOrder(@PathVariable Long dishId, @RequestParam("cantidad") Integer cantidad) {
         
         // Tu código aquí para procesar los datos
@@ -91,24 +81,13 @@ public class OrderController {
 
             // Agregar el objeto Dish a la lista
             dishList.add(newDish);
-        maw.addObject("allcategory", categoryService.getAll());
-        return maw;
-    }
-
-    @PostMapping("/{orderId}/add-detail")
-    public String addDetailToOrder(@PathVariable Long orderId, @ModelAttribute Detail detail) {
-        Order order = orderService.getOrderById(orderId);
-        if (order != null) {
-            // Agregar el detalle a la orden
-            order.addDetail(detail);
-            orderService.createOrder(order);
         }
         
        
         return "redirect:/pedido"; // Redirigir a la página de detalles de la orden
     }
-
-   
+    
+    
 
     @GetMapping("/vaciarLista")
     public String vaciarLista() {
@@ -117,7 +96,7 @@ public class OrderController {
     }
 
 
-    @GetMapping("/pedido/eliminarDish/{id}")
+   @GetMapping("/pedido/eliminarDish/{id}")
     public String eliminarDish(@PathVariable Long id) {
         System.out.println("ID QUE DESEO ELIMINAR DEL LIST------------------" + id);
         // Supongamos que cada objeto Dish tiene un campo de identificación único (por ejemplo, "id")
@@ -137,6 +116,4 @@ public class OrderController {
 
         return "redirect:/pedido"; // Redirige a la página deseada después de eliminar el objeto
     }
-
-
 }

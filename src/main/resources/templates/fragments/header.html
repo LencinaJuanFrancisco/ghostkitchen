@@ -11,19 +11,19 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/menu">Menu</a>
+                    <a class="nav-link active" aria-current="page" href="/menu">Menú</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="hasRole('ROLE_Chef') or hasRole('ROLE_Administrador') or hasRole('ROLE_Cliente') or hasRole('ROLE_Delivery')">
                     <a class="nav-link active" aria-current="page" href="/perfil">Perfil</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="hasRole('ROLE_Chef') or hasRole('ROLE_Administrador') or hasRole('ROLE_Cliente') or hasRole('ROLE_Delivery')">
                     <a class="nav-link active" aria-current="page" href="/pedido">Pedido</a>
                 </li>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="hasRole('ROLE_Chef') or hasRole('ROLE_Administrador')">
                     <a class="nav-link active" aria-current="page" href="/createDish">Crear plato</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_Chef') or hasRole('ROLE_Administrador')">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categorías
                     </a>
