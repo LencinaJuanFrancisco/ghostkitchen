@@ -17,14 +17,19 @@ public class EmailUnicValidator implements ConstraintValidator<EmailUnic, Object
 
     @Override
     public boolean isValid(final Object object, final ConstraintValidatorContext context) {
-        final RegisterDto register = (RegisterDto) object;
-        boolean isVal = !userRepository.existsByEmail(register.getEmail());
+        if (object instanceof RegisterDto) {
+            RegisterDto register = (RegisterDto) object;
+            boolean isVal = !userRepository.existsByEmail(register.getEmail());
 
-        if (!isVal) {
-            context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate()).addPropertyNode("email").addConstraintViolation();
+            if (!isVal) {
+                context.disableDefaultConstraintViolation();
+                context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())
+                        .addPropertyNode("email").addConstraintViolation();
+            }
+
+            return isVal;
         }
 
-        return isVal;
+        return true;
     }
 }

@@ -1,44 +1,61 @@
 <nav class="navbar navbar-expand-lg bg-body-secondary" th:fragment="header">
-  <div class="container-fluid">
-      <img src="/images/favicon.png" alt="Logo" class="logo-img"> 
-    <a class="navbar-brand" href="/">Ghost Kitchen</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarScroll">
-      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/menu">Menu</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/perfil">Perfil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Orden</a>
-        </li>
-        <li class="nav-item ms-auto" sec:authorize="isAuthenticated()">
-          <form class="form-inline" th:action="@{/logout}" method="POST">
-            <button class="btn btn-link nav-link active text-white" type="submit" onclick="return confirm('¿Seguro de cerrar sesión?')">
-              <i class="fa-solid text-white fa-right-from-bracket"></i> Cerrar sesión
-            </button>
-          </form>
-        </li>
-        <li class="nav-item" sec:authorize="isAnonymous()">
-          <a class="nav-link active" aria-current="page" href="/login">
-            <i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión
-          </a>
-        </li>
-        <li class="nav-item" sec:authorize="isAnonymous()">
-          <a class="nav-link active" aria-current="page" href="/register">
-            <i class="fa-solid fa-user-plus"></i> Registrarse
-          </a>
-        </li>
-      </ul>
-     
+    <div class="container-fluid">
+        <img src="/images/favicon.png" alt="Logo" class="logo-img"> 
+        <a class="navbar-brand" href="/">Ghost Kitchen</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/menu">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/perfil">Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/pedido">Pedido</a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/createDish">Crear plato</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Categorías
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li th:each=" cate: ${allcategory}">
+                            <a class="dropdown-item" href="#" th:text="${cate.category}"></a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="createcategory">Añadir categoría</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item ms-auto" sec:authorize="isAuthenticated()">
+                    <form class="form-inline" th:action="@{/logout}" method="POST">
+                        <button class="btn btn-link nav-link active text-white" type="submit" onclick="return confirm('¿Seguro de cerrar sesión?')">
+                            <i class="fa-solid text-white fa-right-from-bracket"></i> Cerrar sesión
+                        </button>
+                    </form>
+                </li>
+                <li class="nav-item" sec:authorize="isAnonymous()">
+                    <a class="nav-link active" aria-current="page" href="/login">
+                        <i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión
+                    </a>
+                </li>
+                <li class="nav-item" sec:authorize="isAnonymous()">
+                    <a class="nav-link active" aria-current="page" href="/register">
+                        <i class="fa-solid fa-user-plus"></i> Registrarse
+                    </a>
+                </li>
+            </ul>
+
+        </div>
     </div>
-  </div>
 </nav>
 

@@ -1,8 +1,6 @@
 package edu.polo.ghostkitchen.services;
 
-import edu.polo.ghostkitchen.entidades.*;
 import edu.polo.ghostkitchen.entidades.Ghosts;
-import edu.polo.ghostkitchen.entidades.Ghosts.GhostRole;
 import edu.polo.ghostkitchen.repositories.*;
 import jakarta.transaction.Transactional;
 import java.util.*;
@@ -24,7 +22,7 @@ public class GhostService implements UserDetailsService {
 
     @Autowired
     private BCryptPasswordEncoder codificator;
-
+    
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Ghosts user = userRepository.findByEmail(email);
@@ -39,20 +37,22 @@ public class GhostService implements UserDetailsService {
         return buildUser(user, authorities);
     }
 
-
-
-      private User buildUser(Ghosts user, Collection<? extends GrantedAuthority> authorities) {
-        
-        return new User(user.getEmail(), user.getPassword(), authorities);
-    } 
+    public Ghosts getById(Long id) {
+        return userRepository.findById(id).get();
+    }
     
+
+
+    private User buildUser(Ghosts user, Collection<? extends GrantedAuthority> authorities) {
+
+        return new User(user.getEmail(), user.getPassword(), authorities);
+    }
+
     public List<GrantedAuthority> buildAuthorities(Ghosts.GhostRole role) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
         return authorities;
     }
-
-  
 
     @Transactional
     public void register(Ghosts user) {
@@ -60,13 +60,7 @@ public class GhostService implements UserDetailsService {
             throw new IllegalArgumentException("Ya existe un usuario con ese Email");
         }
         user.setPassword(codificator.encode(user.getPassword()));
-        // Asignar un rol predeterminado en el momento del registro si es necesario.
-        if (user.getRole() == null) {
-            user.setRole(Ghosts.GhostRole.Client);
-        }
         userRepository.save(user);
     }
-
-    // Resto de los métodos de tu servicio...
 
 }

@@ -22,10 +22,8 @@ public class Chef {
 
     @OneToMany(mappedBy = "chef")
     Set<Dish> dishes;
-    
+
     @OneToMany(mappedBy = "chef")
     Set<Order> orders;
-    
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    private Ghosts users;
+
 }

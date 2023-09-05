@@ -6,6 +6,7 @@ import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.*;
 import java.util.Date;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 @Data
 @Confirm
@@ -33,7 +34,10 @@ public class RegisterKitchenDto {
     @NotEmpty(message = "Ingrese una dirección")
     private String address;
     
-    //@Temporal(TemporalType.DATE)
-    //private Date birthday;
+     private String web;
+    private String schedules;
+    
+    @Temporal(TemporalType.DATE)
+    private Date birthday;
     
 }

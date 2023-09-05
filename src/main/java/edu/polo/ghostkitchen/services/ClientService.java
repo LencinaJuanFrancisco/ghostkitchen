@@ -17,16 +17,17 @@ public class ClientService {
         clientRepository.findAll().forEach(registro -> lista.add(registro));
         return lista;
     }
-    
+
     public Client getById(Long id) {
         return clientRepository.findById(id).get();
     }
-    
+
     public void save(Client client) {
         clientRepository.save(client);
     }
-    
-    public void delete(Long id){
+
+    public void delete(Long id) {
         clientRepository.deleteById(id);
     }
+
 }

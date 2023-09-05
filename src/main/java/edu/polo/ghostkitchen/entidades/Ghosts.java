@@ -54,20 +54,19 @@ public class Ghosts {
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "user")
     Set<Chef> chefs;
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "user")
     Set<Delivery> deliveries;
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "user")
     Set<Client> clients;
 
-
     public enum GhostRole {
-        Admin,
+        Administrador,
         Chef,
-        Client,
+        Cliente,
         Delivery,
     }
 }

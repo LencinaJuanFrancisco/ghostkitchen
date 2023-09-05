@@ -9,29 +9,25 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
- 
-        @Autowired
-    private BCryptPasswordEncoder codificator;
-        
+
     @Autowired
     private GhostService userService;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
-        
-    }
 
+    }
 
     @Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/", "/home", "/menu","/register","/dishdetail" ,"/perfil","/registerKitchen", "/registerDelivery", "/css/**", "/images/**").permitAll()
+				.requestMatchers("/","/categories", "/home","/pedido", "/menu","/register","/dishdetail","/createDish", "/createcategory","/perfil","/registerKitchen", "/registerDelivery", "/css/**", "/images/**")
+				.permitAll()
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form
@@ -43,10 +39,7 @@ public class SecurityConfiguration {
 			)
 			.logout((logout) -> logout.permitAll());
 
-		return http.build();
-	}
+        return http.build();
+
+    }
 }
-
-
-
-

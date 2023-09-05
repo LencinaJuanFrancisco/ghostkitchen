@@ -12,21 +12,20 @@ public class OrderService {
     @Autowired
     OrderRepository orderRepository;
 
-    public List<Order> getAll() {
-        List<Order> lista = new ArrayList<Order>();
-        orderRepository.findAll().forEach(registro -> lista.add(registro));
-        return lista;
+    public List<Order> getAllOrders() {
+        return (List<Order>) orderRepository.findAll();
     }
     
-    public Order getById(Long id) {
-        return orderRepository.findById(id).get();
+    public Order getOrderById(Long id) {
+        return orderRepository.findById(id).orElse(null);
     }
-    
-    public void save(Order order) {
-        orderRepository.save(order);
+
+    public Order createOrder(Order order) {
+        // Puedes realizar validaciones o lógica de negocio aquí antes de guardar la orden
+        return orderRepository.save(order);
     }
-    
-    public void delete(Long id){
+
+    public void deleteOrder(Long id) {
         orderRepository.deleteById(id);
     }
 }

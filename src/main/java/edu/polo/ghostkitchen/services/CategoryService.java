@@ -13,20 +13,18 @@ public class CategoryService {
     CategoryRepository categoryRepository;
 
     public List<Category> getAll() {
-        List<Category> lista = new ArrayList<Category>();
-        categoryRepository.findAll().forEach(registro -> lista.add(registro));
-        return lista;
+        return (List<Category>) categoryRepository.findAll();
     }
-    
+
     public Category getById(Long id) {
         return categoryRepository.findById(id).get();
     }
-    
+
     public void save(Category category) {
         categoryRepository.save(category);
     }
-    
-    public void delete(Long id){
+
+    public void delete(Long id) {
         categoryRepository.deleteById(id);
     }
 }

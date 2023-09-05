@@ -12,7 +12,10 @@ import jakarta.validation.*;
 @Constraint(validatedBy = ConfirmValidator.class)
 @Documented
 public @interface Confirm {
-        String message() default "Las contraseñas no coinciden";
-        Class<?>[] groups() default {};
-        Class<? extends Payload>[] payload() default{};
+
+    String message() default "Las contraseñas no coinciden";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 }

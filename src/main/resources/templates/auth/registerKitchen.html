@@ -20,6 +20,11 @@
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
                     </div>
                     <div class="mb-3">
+                        <label for="birthday" class="form-label">Fecha de Nacimiento</label>
+                        <input type="date" class="form-control" id="birthday" name="birthday">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></div>
+                    </div>
+                    <div class="mb-3">
                         <label for="email" class="form-label">Correo electrónico</label>
                         <input type="text" class="form-control" id="email" name="email">
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
@@ -34,6 +39,16 @@
                         <input type="password" class="form-control" id="confirm" th:field="*{confirm}" th:errorClass="'is-invalid'">
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('confirm')}" th:errors="*{confirm}"></div>
                     </div>
+                    <div class="mb-3">
+                        <label for="web" class="form-label">Página web</label>
+                        <input type="text" class="form-control" id="web" name="web">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('web')}" th:errors="*{web}"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="schedules" class="form-label">Horarios</label>
+                        <input type="text" class="form-control" id="schedules" name="schedules">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('schedules')}" th:errors="*{schedules}"></div>
+                    </div>
                     <div class="row mb-3">
                         <div class="g-recaptcha col-12 d-flex justify-content-center" name="recaptcha" th:field="*{recaptcha}" th:errorClass="'is-invalid'" data-sitekey="6Lei5sYnAAAAAHXHjR7XsminVO1xRO_aiwcJhsFs"></div>
                         <div class="invalid-feedback col-12" th:if="${#fields.hasErrors('recaptcha')}" th:errors="*{recaptcha}"></div>
@@ -42,23 +57,23 @@
                         <button type="submit" class="btn btn-primary mx-2">Crear sesión</button>
                     </div>
                 </form>
-               <div class="card-footer text-center p-3">
-    
- <div class="card-footer text-center p-3">
-    <a href="/login" class="text-decoration-none fw-bold h5">Ya tengo una cuenta</a>
-</div>
-<div class="card-footer text-center p-3">
-    <a href="/register" class="text-decoration-none fw-bold h5">Registrarme como Cliente</a>
-</div>
-<div class="card-footer text-center p-3">
-    <a href="/registerDelivery" class="text-decoration-none fw-bold h5">Registrarme como Delivery</a>
-</div>
+                <div class="card-footer text-center p-3">
 
+                    <div class="card-footer text-center p-3">
+                        <a href="/login" class="text-decoration-none fw-bold h5">Ya tengo una cuenta</a>
+                    </div>
+                    <div class="card-footer text-center p-3">
+                        <a href="/register" class="text-decoration-none fw-bold h5">Registrarme como Cliente</a>
+                    </div>
+                    <div class="card-footer text-center p-3">
+                        <a href="/registerDelivery" class="text-decoration-none fw-bold h5">Registrarme como Delivery</a>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
 </div>
-    </div>
 
 </script>
 <script th:fragment="script">
