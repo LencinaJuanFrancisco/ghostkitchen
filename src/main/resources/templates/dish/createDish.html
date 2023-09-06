@@ -8,7 +8,7 @@
                         Crear plato
                     </div>
                 </div>
-                <form class="card-body" th:action="@{/createDish}" th:object="${dishDto}" method="POST">
+                <form class="card-body" th:action="@{/createDish}" th:object="${dishDto}" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <div class="mb-3">
                         <label for="name" class="form-label">Nombre del plato</label>
@@ -38,10 +38,10 @@
                             <option th:each="category : ${allCategories}" th:value="${category.id}" th:text="${category.category}"></option>
                         </select>
                     </div>
-<!--                    <div class="mb-3">
+                    <div class="mb-3">
                         <label for="image" class="form-label">Imagen del plato</label>
                         <input type="file" class="form-control" id="image" name="image">
-                    </div>-->
+                    </div>
                     <div class="mb-3">
                         <label for="disponibility" class="form-label"></label>
                         <div class="form-check custom-checkbox"> <!-- Agrega la clase "custom-checkbox" -->

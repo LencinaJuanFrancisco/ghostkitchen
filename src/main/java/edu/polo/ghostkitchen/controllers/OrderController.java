@@ -58,15 +58,15 @@ public ModelAndView pedido() {
     return modelAndView;
 }
 
-
-   
+ 
+  
 @PostMapping("/pedido/{dishId}")
-    public String addDetailToOrder(@PathVariable Long dishId, @RequestParam("cantidad") Integer cantidad) {
-        
+    public String addDetailToOrder(@PathVariable Long dishId, @RequestParam("cantidad") Integer cantidad,
+        @RequestParam("detalle") String detalle) {
         // Tu código aquí para procesar los datos
         System.out.println("id plato: " + dishId);
         System.out.println("cantidad: " + cantidad);
-        
+         System.out.println("detalle: " + detalle);
          // Buscar el Dish en la base de datos por su ID
         Dish dish = dishService.getById(dishId);
 
@@ -76,9 +76,10 @@ public ModelAndView pedido() {
             Dish newDish = new Dish();
             newDish.setId(dish.getId());
             newDish.setName(dish.getName());
-            newDish.setPrice(dish.getPrice());
+            newDish.setPrice(dish.getPrice());          
+            newDish.setImage(dish.getImage());
             // newDish.setCantidad(cantidad);
-
+           // newDish.setDetalle(detalle);
             // Agregar el objeto Dish a la lista
             dishList.add(newDish);
         }

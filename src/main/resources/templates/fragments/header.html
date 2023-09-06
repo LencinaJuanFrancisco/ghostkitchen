@@ -16,9 +16,6 @@
                 <li class="nav-item" sec:authorize="hasRole('ROLE_Chef') or hasRole('ROLE_Administrador') or hasRole('ROLE_Cliente') or hasRole('ROLE_Delivery')">
                     <a class="nav-link active" aria-current="page" href="/perfil">Perfil</a>
                 </li>
-                <li class="nav-item" sec:authorize="hasRole('ROLE_Chef') or hasRole('ROLE_Administrador') or hasRole('ROLE_Cliente') or hasRole('ROLE_Delivery')">
-                    <a class="nav-link active" aria-current="page" href="/pedido">Pedido</a>
-                </li>
                 </li>
                 <li class="nav-item" sec:authorize="hasRole('ROLE_Chef') or hasRole('ROLE_Administrador')">
                     <a class="nav-link active" aria-current="page" href="/createDish">Crear plato</a>
@@ -34,6 +31,14 @@
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="createcategory">Añadir categoría</a></li>
                     </ul>
+                </li>
+                <li class="nav-item  position-relative" sec:authorize="hasRole('ROLE_Chef') or hasRole('ROLE_Administrador') or hasRole('ROLE_Cliente') or hasRole('ROLE_Delivery')">
+                    <a class="nav-link active" aria-current="page" href="/pedido"><i class="fas fa-shopping-cart"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            9
+                            <span class="visually-hidden">unread messages</span>
+                          </span>
+                    </a>
                 </li>
 
                 <li class="nav-item ms-auto" sec:authorize="isAuthenticated()">
