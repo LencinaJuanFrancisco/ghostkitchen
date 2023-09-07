@@ -4,10 +4,10 @@
         <h1 class="text-light text-center">Detalles de la Orden</h1>
 
         <section class="m-5">
-            <div th:if="${#lists.isEmpty(allOrders) or #strings.isEmpty(allOrders)}">
+<!--            <div th:if="${#lists.isEmpty(allDetails) or #strings.isEmpty(allDetails)}">
                 <h1 class="text-light text-center">NO HAY ELEMENTOS EN TU CARRITO GIL, Anda y compra !!!!</h1>
-            </div>
-            <table class="table align-middle mb-0 bg-white" th:unless="${#lists.isEmpty(allOrders)}">
+            </div>-->
+            <table class="table align-middle mb-0 bg-white" th:unless="${#lists.isEmpty(allDetails)}">
                 <thead class="bg-light">
 
                     <tr>
@@ -16,40 +16,44 @@
                         <th>Agregar/Quitar ingrediente</th>
                         <th>$</th>
                         <th>Cantidad</th>
+                        <th>Subtotal</th>
                         <th>Eliminar</th>
 
                     </tr>
                 </thead>
                 <tbody>
 
-                    <tr  th:each="dish : ${allOrders}">
-                        <td>
+                    <tr  th:each="detail : ${allDetails}" >
+                        <td >
                             <div class="d-flex align-items-center">
                                 <img
-                                    th:src="${'/images/dishes/' + dish.image}"
+                                    th:src="${'/images/dishes/' + detail.dish.image}"
                                     alt=""
                                     style="width: 45px; height: 45px"
                                     class="rounded-circle"
                                     />
                                 <div class="ms-3">
-                                    <p class="fw-bold mb-1" th:text="${dish.name}"></p>
+                                    <p class="fw-bold mb-1" th:text="${detail.dish.name}"></p>
                                     <p class="text-muted mb-0">DE: a lo pancho</p>
                                 </div>
                             </div>
                         </td>
                         <td>
 
-                            <input placeholder="Quitar o agregar ingredientes"/>
+                            <p class="text-muted mb-0" th:text="${detail.detalle}"></p>
                         </td>
                         <td>
 
-                            <p class="text-muted mb-0" th:text="${dish.price}"></p>
+                            <p class="text-muted mb-0" th:text="${detail.dish.price}"></p>
                         </td>
                         <td>
-                            <input type="number" min="1" max="5" value="1">
+                            <p class="text-muted mb-0" th:text="${detail.cantidad}"></p>
                         </td>
                         <td>
-                            <a th:href="@{'/pedido/eliminarDish/' + ${dish.id}}" type="button" class="btn btn-danger"><i class="fas fa-trash text-light"></i></a>
+                            <a th:href="@{'/pedido/eliminarDish/' + ${detail.dish.id}}" type="button" class="btn btn-danger"><i class="fas fa-trash text-light"></i></a>
+                        </td>
+                        <td>
+                            <p class="text-muted mb-0" th:text="${detail.cantidad * detail.dish.price}"></p>
                         </td>
                     </tr>
 
@@ -64,7 +68,7 @@
 
         <div class="text-center">
             <a href="/menu" class="btn btn-secondary">Seguir Comprando</a>
-            <a href="/menu" class="btn btn-info">Finalizar Compra</a>
+            <a href="/createOrden" class="btn btn-info">Finalizar Compra</a>
             <a href="/vaciarLista" class="btn btn-danger">Eliminar Orden</a>
         </div>
     </div>
