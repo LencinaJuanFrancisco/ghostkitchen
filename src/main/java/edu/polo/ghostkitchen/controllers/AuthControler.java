@@ -1,5 +1,6 @@
 package edu.polo.ghostkitchen.controllers;
 
+import edu.polo.ghostkitchen.classes.CartAdm;
 import edu.polo.ghostkitchen.entidades.*;
 import edu.polo.ghostkitchen.repositories.*;
 import edu.polo.ghostkitchen.services.*;
@@ -37,6 +38,9 @@ public class AuthControler {
 
     @Autowired
     private RecaptchaService recaptchaService;
+    
+    @Autowired
+    private CartAdm cartAdm;
 
     @Autowired
     private CategoryService categoryService;
@@ -53,6 +57,9 @@ public class AuthControler {
             @RequestParam(name = "error", required = false) String error,
             @RequestParam(name = "logout", required = false) String logout) {
 
+        //Se limpia el carrito 
+        cartAdm.limpiar();
+        
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Iniciar sesión");

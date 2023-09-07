@@ -21,7 +21,7 @@ import edu.polo.ghostkitchen.services.DishService;
 import edu.polo.ghostkitchen.services.OrderService;
 import edu.polo.ghostkitchen.entidades.Detail;
 import edu.polo.ghostkitchen.entidades.Dish;
-import edu.polo.ghostkitchen.entidades.Order;
+import edu.polo.ghostkitchen.classes.CartAdm;
 import edu.polo.ghostkitchen.entidades.Detail;
 import edu.polo.ghostkitchen.entidades.Ghosts;
 import edu.polo.ghostkitchen.entidades.Order;
@@ -43,16 +43,19 @@ public class OrderController {
 
     @Autowired
     private OrderRepository orderRepository;
-    
-      @Autowired
+
+    @Autowired
     private ClientRepository clientRepository;
-      
-        @Autowired
+
+    @Autowired
     private GhostsRepository userRepository;
-    
+
+    @Autowired
+    private CartAdm cartAdm;
+
     @Autowired
     private DetailRepository detailRepository;
-    
+
     @Autowired
     private DetailService detailService;
 
@@ -65,17 +68,13 @@ public class OrderController {
     }
 
     // Declarar una lista para almacenar los objetos Dish
-    private List<Dish> dishList = new ArrayList<>();
-    private List<Detail> detailList = new ArrayList<>();
-
     @GetMapping("/pedido")
     public ModelAndView pedido() {
         ModelAndView modelAndView = new ModelAndView("fragments/base");
         modelAndView.addObject("titulo", "Orden");
         modelAndView.addObject("vista", "orden/order-details");
-        modelAndView.addObject("allOrders", dishList);
-        modelAndView.addObject("allDetails", detailList);
-        modelAndView.addObject("carritoVacio", dishList.isEmpty());
+        modelAndView.addObject("cartAdm", cartAdm);
+        modelAndView.addObject("allDetails", cartAdm.getDetailList());
         modelAndView.addObject("allcategory", categoryService.getAll());
         return modelAndView;
     }
@@ -83,7 +82,7 @@ public class OrderController {
     @PostMapping("/pedido/{dishId}")
     public String addDetailToOrder(@PathVariable Long dishId, @RequestParam("cantidad") Integer cantidad,
             @RequestParam("detalle") String detalle) {
-       
+
         // Buscar el Dish en la base de datos por su ID
         Dish dish = dishService.getById(dishId);
 
@@ -99,9 +98,8 @@ public class OrderController {
             detail.setCantidad(cantidad);
             detail.setDetalle(detalle);
             detail.setDish(dish);
-            // Agregar el objeto Dish a la lista
-            dishList.add(newDish);
-            detailList.add(detail);        
+
+            cartAdm.addDetail(detail);
         }
 
         return "redirect:/pedido"; // Redirigir a la página de detalles de la orden
@@ -109,8 +107,8 @@ public class OrderController {
 
     @GetMapping("/vaciarLista")
     public String vaciarLista() {
-        dishList.clear();
-         detailList.clear();
+
+        cartAdm.limpiar();
         return "redirect:/menu"; // Redirige a la página deseada después de vaciar la lista
     }
 
@@ -120,7 +118,7 @@ public class OrderController {
         // Supongamos que cada objeto Dish tiene un campo de identificación único (por ejemplo, "id")
         // Puedes buscar el objeto que deseas eliminar por su identificación
         Detail dishToRemove = null;
-        for (Detail detail : detailList) {
+        for (Detail detail : cartAdm.getDetailList()) {
             if (detail.getDish().getId().equals(id)) {
                 dishToRemove = detail;
                 break;
@@ -129,49 +127,45 @@ public class OrderController {
 
         // Si se encuentra el objeto, eliminarlo de la lista
         if (dishToRemove != null) {
-            detailList.remove(dishToRemove);
+            cartAdm.removeOne(dishToRemove);
         }
 
         return "redirect:/pedido"; // Redirige a la página deseada después de eliminar el objeto
     }
-    
-     @GetMapping("/createOrden")
-     public String createOrden() {
-       Order order = new Order();
-       orderRepository.save(order);
-       
-       //Delivery delivery = new Delivery();
-       
-       float prices = 0;
-       
-         String user = SecurityContextHolder.getContext().getAuthentication().getName();
+
+    @GetMapping("/createOrden")
+    public String createOrden() {
+        Order order = new Order();
+        orderRepository.save(order);
+
+        //Delivery delivery = new Delivery();
+        float prices = 0;
+
+        String user = SecurityContextHolder.getContext().getAuthentication().getName();
         Ghosts userFind = userRepository.findByEmail(user);
         Client clientFind = clientRepository.findClientByUserId(userFind.getId());
         order.setClient(clientFind);
-        
-        System.out.println(clientFind + "AAAAAAAAAAAAAAAAAA" );
-        
-        for (Detail detail : detailList) {
-             Detail det = new Detail();
-             det = detail;
-             det.setOrder(order);
-             prices = prices + ((det.getDish().getPrice())*det.getCantidad());
-            
-             detailRepository.save(det);
-             order.setChef(detail.getDish().getChef());
-                    
-             //order.setPrice((detail.getCantidad() * detail.getDish().getPrice()));
-            
-            }
-        
-       
-        
+
+        System.out.println(clientFind + "AAAAAAAAAAAAAAAAAA");
+
+        for (Detail detail : cartAdm.getDetailList()) {
+            Detail det = new Detail();
+            det = detail;
+            det.setOrder(order);
+            prices = prices + ((det.getDish().getPrice()) * det.getCantidad());
+
+            detailRepository.save(det);
+            order.setChef(detail.getDish().getChef());
+
+            //order.setPrice((detail.getCantidad() * detail.getDish().getPrice()));
+        }
+
         order.setPrice(prices);
         order.setState(2);
-        
+
         orderRepository.save(order);
-        
-         detailList.clear();
+
+        cartAdm.limpiar();
         return "redirect:/menu"; // Redirige a la página deseada después de vaciar la lista
     }
 }

@@ -1,5 +1,6 @@
 package edu.polo.ghostkitchen.controllers;
 
+import edu.polo.ghostkitchen.classes.CartAdm;
 import org.springframework.web.multipart.MultipartFile;
 import edu.polo.ghostkitchen.dto.CategoryDto;
 import edu.polo.ghostkitchen.dto.DishDto;
@@ -48,6 +49,10 @@ public class NewDishController {
 
     @Autowired
     private CategoryService categoryService;
+    
+       
+    @Autowired
+    private CartAdm cartAdm;
 
     @GetMapping("/createDish")
     public ModelAndView createDish(DishDto dishDto) {
@@ -57,6 +62,7 @@ public class NewDishController {
         maw.addObject("vista", "dish/createDish");
         maw.addObject("dishDto", dishDto);
         maw.addObject("dish", dish);
+              maw.addObject("cartAdm", cartAdm);
         maw.addObject("allcategory", categoryService.getAll());
         List<Category> allCategories = categoryService.getAll(); // Reemplaza "Category" con el nombre de tu entidad de categoría
         maw.addObject("allCategories", allCategories);

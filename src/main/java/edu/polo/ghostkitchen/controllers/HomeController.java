@@ -1,5 +1,7 @@
 package edu.polo.ghostkitchen.controllers;
 
+import edu.polo.ghostkitchen.classes.CartAdm;
+import edu.polo.ghostkitchen.entidades.Chef;
 import edu.polo.ghostkitchen.repositories.*;
 import edu.polo.ghostkitchen.services.*;
 import org.springframework.beans.factory.annotation.*;
@@ -18,12 +20,19 @@ public class HomeController {
     @Autowired
     DishService dishService;
 
+    @Autowired
+    ChefService chefService;
+
+    @Autowired
+    private CartAdm cartAdm;
+
     @RequestMapping("/")
     public ModelAndView home() {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Inicio");
         maw.addObject("vista", "inicio/home");
+        maw.addObject("cartAdm", cartAdm);
         maw.addObject("allcategory", categoryService.getAll());
         /*
         long random = (long) ((Math.random() * (cursoRepositorio.count() - 1)) + 1);
@@ -44,17 +53,23 @@ public class HomeController {
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Menú");
         maw.addObject("vista", "inicio/menu");
+        maw.addObject("cartAdm", cartAdm);
         maw.addObject("allcategory", categoryService.getAll());
         maw.addObject("allDishes", dishService.getAll());
         return maw;
     }
 
-    @RequestMapping("/perfil")
-    public ModelAndView perfil() {
+    @RequestMapping("/perfil/{chefId}")
+    public ModelAndView perfil(@PathVariable Long chefId) {
+        
+         Chef chef = chefService.getById(chefId);
+        
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Perfil");
         maw.addObject("vista", "inicio/perfil");
+        maw.addObject("cartAdm", cartAdm);
+        maw.addObject("chef",chef);
         maw.addObject("allcategory", categoryService.getAll());
         return maw;
     }
@@ -65,6 +80,7 @@ public class HomeController {
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "dishdetail");
         maw.addObject("vista", "inicio/dishdetail");
+        maw.addObject("cartAdm", cartAdm);
         maw.addObject("allcategory", categoryService.getAll());
         return maw;
     }
