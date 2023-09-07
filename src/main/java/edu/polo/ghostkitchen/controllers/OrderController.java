@@ -2,6 +2,7 @@ package edu.polo.ghostkitchen.controllers;
 
 import edu.polo.ghostkitchen.entidades.Chef;
 import edu.polo.ghostkitchen.entidades.Client;
+import edu.polo.ghostkitchen.entidades.Delivery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,6 +139,9 @@ public class OrderController {
      public String createOrden() {
        Order order = new Order();
        orderRepository.save(order);
+       
+       //Delivery delivery = new Delivery();
+       
        float prices = 0;
        
          String user = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -152,10 +156,11 @@ public class OrderController {
              det = detail;
              det.setOrder(order);
              prices = prices + ((det.getDish().getPrice())*det.getCantidad());
-            detailRepository.save(det);
             
-          //  order.setChef(detail.getDish().getChef());
-            //order.setPrice((detail.getCantidad() * detail.getDish().getPrice()));
+             detailRepository.save(det);
+             order.setChef(detail.getDish().getChef());
+                    
+             //order.setPrice((detail.getCantidad() * detail.getDish().getPrice()));
             
             }
         

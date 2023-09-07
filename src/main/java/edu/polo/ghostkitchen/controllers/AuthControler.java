@@ -33,6 +33,9 @@ public class AuthControler {
     private GhostsRepository userRepository;
 
     @Autowired
+    private ClientRepository clientRepository;
+
+    @Autowired
     private RecaptchaService recaptchaService;
 
     @Autowired
@@ -46,7 +49,7 @@ public class AuthControler {
     }
 
     @GetMapping("/login")
-    public ModelAndView showLoginForm(HttpSession session,Model model,
+    public ModelAndView showLoginForm(HttpSession session, Model model,
             @RequestParam(name = "error", required = false) String error,
             @RequestParam(name = "logout", required = false) String logout) {
 
@@ -57,14 +60,12 @@ public class AuthControler {
         model.addAttribute("error", error);
         model.addAttribute("logout", logout);
         maw.addObject("allcategory", categoryService.getAll());
-        
-      
+
 //        String username = SecurityContextHolder.getContext().getAuthentication().getName();
 //        Ghosts user = userRepository.findByUsername(username);
 //        session.setAttribute("usuario", user);
 //          System.out.println(user + "Y ESTO ES SESION: " + session);
 //    
-      
         return maw;
     }
 
@@ -101,7 +102,7 @@ public class AuthControler {
         if (br.hasErrors()) {
             return this.register(registerDto);
         }
-
+        Client c = new Client();
         Ghosts u = new Ghosts();
         u.setAddress(registerDto.getAddress());
         u.setName(registerDto.getName());
@@ -110,10 +111,15 @@ public class AuthControler {
         u.setBirthday(registerDto.getBirthday());
         if (userRepository.existsByRole(Ghosts.GhostRole.Administrador)) {
             u.setRole(Ghosts.GhostRole.Cliente);
+
+            userRepository.save(u);
+            c.setUser(u);
+            clientRepository.save(c);
         } else {
             u.setRole(Ghosts.GhostRole.Administrador);
+            userRepository.save(u);
         }
-        userRepository.save(u);
+
         ra.addFlashAttribute("message", "Usuario creado exitosamente");
         return new ModelAndView("redirect:/login");
     }
