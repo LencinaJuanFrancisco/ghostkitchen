@@ -67,6 +67,8 @@ public class OrderController {
         this.orderService = orderService;
     }
 
+    Long chefId = 0L;
+    
     // Declarar una lista para almacenar los objetos Dish
     @GetMapping("/pedido")
     public ModelAndView pedido() {
@@ -76,6 +78,8 @@ public class OrderController {
         modelAndView.addObject("cartAdm", cartAdm);
         modelAndView.addObject("allDetails", cartAdm.getDetailList());
         modelAndView.addObject("allcategory", categoryService.getAll());
+        modelAndView.addObject("chefId", chefId);
+        System.out.println(chefId + "ESTE ES 0");
         return modelAndView;
     }
 
@@ -85,7 +89,8 @@ public class OrderController {
 
         // Buscar el Dish en la base de datos por su ID
         Dish dish = dishService.getById(dishId);
-
+        chefId = dish.getChef().getId();
+        System.out.println(chefId + "ESTE ES OTRO NUMERO");
         if (dish != null) {
             // Crear un nuevo objeto Dish con los campos deseados
             Dish newDish = new Dish();
@@ -109,6 +114,7 @@ public class OrderController {
     public String vaciarLista() {
 
         cartAdm.limpiar();
+        chefId = 0L;
         return "redirect:/menu"; // Redirige a la página deseada después de vaciar la lista
     }
 
@@ -123,13 +129,17 @@ public class OrderController {
                 dishToRemove = detail;
                 break;
             }
+            
         }
 
         // Si se encuentra el objeto, eliminarlo de la lista
         if (dishToRemove != null) {
             cartAdm.removeOne(dishToRemove);
         }
-
+        if (cartAdm.getSizeList() == 0) {
+            chefId = 0L;
+        }
+        
         return "redirect:/pedido"; // Redirige a la página deseada después de eliminar el objeto
     }
 
@@ -146,7 +156,6 @@ public class OrderController {
         Client clientFind = clientRepository.findClientByUserId(userFind.getId());
         order.setClient(clientFind);
 
-        System.out.println(clientFind + "AAAAAAAAAAAAAAAAAA");
 
         for (Detail detail : cartAdm.getDetailList()) {
             Detail det = new Detail();

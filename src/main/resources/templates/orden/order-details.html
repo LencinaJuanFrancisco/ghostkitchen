@@ -13,7 +13,7 @@
                     <tr>
 
                         <th>Plato</th>
-                        <th>Agregar/Quitar ingrediente</th>
+                        <th>Agregar/Quitar ingredientes</th>
                         <th>$</th>
                         <th>Cantidad</th>
                         <th>Subtotal</th>
@@ -34,7 +34,7 @@
                                     />
                                 <div class="ms-3">
                                     <p class="fw-bold mb-1" th:text="${detail.dish.name}"></p>
-                                    <p class="text-muted mb-0">DE: a lo pancho</p>
+                                    <p class="text-muted mb-0" th:text="${detail.dish.chef.user.name}"></p>
                                 </div>
                             </div>
                         </td>
@@ -69,9 +69,10 @@
 
 
         <div class="text-center">
-            <a href="/menu" class="btn btn-secondary">Seguir Comprando</a>
-            <a href="/createOrden" class="btn btn-info">Finalizar Compra</a>
-            <a href="/vaciarLista" class="btn btn-danger">Eliminar Orden</a>
+            <a th:if="${chefId != 0}" th:href="'/perfil/' + ${chefId}" class="btn btn-secondary">Seguir Comprando</a>
+            <a th:if="${chefId == 0}" href="/menu"  class="btn btn-secondary">Comprar</a>
+            <a th:if="${chefId != 0}" href="/createOrden" class="btn btn-info">Finalizar Compra</a>
+            <a th:if="${chefId != 0}" href="/vaciarLista" class="btn btn-danger">Eliminar Orden</a>
         </div>
     </div>
 

@@ -36,7 +36,7 @@
 
                         </div>
                         <div >
-                          
+
                             <a type="button" href="/perfil/${dihs.chef.id}" class="fst-italic" th:text="${dihs.chef.user.name}"></a>
                         </div>
                         <div>
@@ -52,6 +52,69 @@
 
 
 
+    <section class="py-5">
+        <h1 class="text-center text-light z-3">Menú - Todos</h1>
+        <div th:if="${message}" class="alert alert-success mt-3 d-flex justify-content-center">
+            <p th:text="${message}"></p>
+        </div>
+
+
+
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+
+                <div th:each="dish : ${allDishes}">
+                    <form th:action="@{'/pedido/' + ${dish.id} }" th:object="${dish}"  method="POST" enctype="multipart/form-data">
+
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Product image-->
+                                <img class="card-img-top" th:src="${'/images/dishes/' + dish.image}" />
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center" >
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder" th:text='${dish.name}'></h5>
+                                        <!-- Product reviews-->
+                                        <div class="d-flex justify-content-center small text-warning mb-2">
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                        </div>
+                                        <!-- Product price-->
+                                        <span th:text="'$ ' + ${dish.price}">
+
+                                        </span>
+                                        <p class="card-text"  th:text="${dish.description}" style="width: 170px; font-size: 0.75em; text-align: center;">
+
+                                        </p>
+
+                                    </div>
+                                    <br><input  type="text" name="detalle" placeholder="Agregar/Quitar ingredientes" style="width: 170px; font-size: 0.75em; text-align: center;">
+
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
+                                    <input type="number" name="cantidad" min="1" max="5" value="1" style="width: 30px; height: 20px; text-align: center; font-size: 0.8em;">
+                                    <div class="text-center">
+
+                                        <button type="submit" class="btn btn-outline-dark mt-auto">Pedir</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
 
 
 
@@ -60,6 +123,8 @@
     
     -->
 </body>
+
+
 
 <div th:fragment="script">
 
