@@ -1,56 +1,5 @@
 <body th:fragment="contenido">
 
-    <main class="container py-5">
-        <h1 class="text-center text-light z-3">Menú - Todos</h1>
-        <div th:if="${message}" class="alert alert-success mt-3 d-flex justify-content-center">
-            <p th:text="${message}"></p>
-        </div>
-
-
-
-        <hr class="my-5" />
-
-
-        <div class="row" data-masonry='{"percentPosition": true }'>
-            <div class="col-sm-6 col-lg-3 mb-6" th:each="dihs : ${allDishes}">
-                <form th:action="@{'/pedido/' + ${dihs.id} }" th:object="${dish}"  method="POST" enctype="multipart/form-data">
-
-                    <div class="card mb-5 w-70">
-                        <div style="width: 100%; height: 200px; overflow: hidden;">
-                            <img
-                                th:src="${'/images/dishes/' + dihs.image}"
-                                class="card-img-top rounded-image"
-                                alt="Producto Sugerido 4"
-                                style="width: 100%; height: 100%; object-fit: cover;"
-                                />
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${dihs.name}"></h5>
-                            <p class="card-text"  th:text="${dihs.description}">
-
-                            </p>
-
-                            <p class="card-text" th:text="'$ ' + ${dihs.price}"></p>
-                            <input type="number" name="cantidad" min="1" max="5" width="30px" value="1" />
-                            <input type="text" name="detalle" placeholder="Agregar/Quitar ingredientes" >
-
-                        </div>
-                        <div >
-
-                            <a type="button" href="/perfil/${dihs.chef.id}" class="fst-italic" th:text="${dihs.chef.user.name}"></a>
-                        </div>
-                        <div>
-                            <button type="submit" class="btn btn-primary">Pedir</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </main>
-
-
-
-
 
     <section class="py-5">
         <h1 class="text-center text-light z-3">Menú - Todos</h1>
@@ -70,6 +19,11 @@
                         <div class="col mb-5">
                             <div class="card h-100">
                                 <!-- Product image-->
+                                
+                                 
+                                
+                                <a th:href="@{'/perfil/' + ${dish.chef.id}}" class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem; text-decoration: none;" th:text='${dish.chef.user.name}'>
+                                </a>
                                 <img class="card-img-top" th:src="${'/images/dishes/' + dish.image}" />
                                 <!-- Product details-->
                                 <div class="card-body p-4">
@@ -98,7 +52,7 @@
                                 </div>
                                 <!-- Product actions-->
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
-                                    <input type="number" name="cantidad" min="1" max="5" value="1" style="width: 30px; height: 20px; text-align: center; font-size: 0.8em;">
+                                    <input type="number" name="cantidad" min="1" max="5" value="1" style="width: 30px; height: 20px; text-align: center; font-size: 0.8em; margin-bottom: 10px">
                                     <div class="text-center">
 
                                         <button type="submit" class="btn btn-outline-dark mt-auto">Pedir</button>
@@ -113,6 +67,7 @@
         </div>
     </section>
 
+    
 
 
 
