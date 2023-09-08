@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Collections;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,6 +45,18 @@ public class DishService {
     public List<Dish> getAll() {
         return (List<Dish>) dishRepository.findAll();
     }
+        
+      public List<Dish> getAllById(Long chefId) {
+    // Obtén todos los platos de la base de datos
+    List<Dish> allDishes = this.getAll();
+
+    // Filtra los platos que corresponden al chefId dado
+    List<Dish> dishesForChef = allDishes.stream()
+            .filter(dish -> dish.getChef().getId().equals(chefId))
+            .collect(Collectors.toList());
+
+    return dishesForChef;
+}
     
    
 }

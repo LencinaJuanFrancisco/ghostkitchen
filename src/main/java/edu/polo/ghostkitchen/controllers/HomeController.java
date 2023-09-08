@@ -2,8 +2,10 @@ package edu.polo.ghostkitchen.controllers;
 
 import edu.polo.ghostkitchen.classes.CartAdm;
 import edu.polo.ghostkitchen.entidades.Chef;
+import edu.polo.ghostkitchen.entidades.Dish;
 import edu.polo.ghostkitchen.repositories.*;
 import edu.polo.ghostkitchen.services.*;
+import java.util.List;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -63,14 +65,15 @@ public class HomeController {
     public ModelAndView perfil(@PathVariable Long chefId) {
         
          Chef chef = chefService.getById(chefId);
-        
+       List<Dish> dish =  dishService.getAllById(chefId);
+         System.out.println(dish + "AAAAAAAAAAAAAAAAAAAAAAAAA");
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Perfil");
         maw.addObject("vista", "inicio/perfil");
         maw.addObject("cartAdm", cartAdm);
         maw.addObject("chef",chef);
-          maw.addObject("allDishes", dishService.getAll());
+          maw.addObject("dish", dish);
         maw.addObject("allcategory", categoryService.getAll());
         return maw;
     }
