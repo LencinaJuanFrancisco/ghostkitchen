@@ -2,7 +2,7 @@ body {
     position: relative;
     min-height: 100vh;
     font-family: 'Lato', sans-serif;
-    background: url("/images/fondo2.jpg") no-repeat center center fixed;
+    background: url("/images/background.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -93,4 +93,8 @@ body::before {
 }
 hr.my-5 {
     border-color: transparent;
+}
+
+.custom-margin-right {
+    margin-right: 25px;
 }

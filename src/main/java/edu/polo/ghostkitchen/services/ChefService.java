@@ -2,6 +2,7 @@ package edu.polo.ghostkitchen.services;
 
 import edu.polo.ghostkitchen.entidades.*;
 import edu.polo.ghostkitchen.repositories.*;
+import java.util.List;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
@@ -22,5 +23,8 @@ public class ChefService {
     public Chef findChefsByUserId(Long userId) {
         return chefRepository.findChefsByUserId(userId);
     }
+
+    public Object getAll() {
+        return (List<Chef>) chefRepository.findAll();   }
 
 }
