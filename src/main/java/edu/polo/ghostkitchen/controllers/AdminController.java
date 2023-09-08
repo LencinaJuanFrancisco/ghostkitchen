@@ -1,5 +1,6 @@
 package edu.polo.ghostkitchen.controllers;
 
+import edu.polo.ghostkitchen.classes.CartAdm;
 import edu.polo.ghostkitchen.entidades.Category;
 import edu.polo.ghostkitchen.repositories.CategoryRepository;
 import edu.polo.ghostkitchen.dto.CategoryDto;
@@ -18,12 +19,17 @@ public class AdminController implements WebMvcConfigurer {
 
     @Autowired
     private CategoryValidator categoryValidator;
+    
+       
+    @Autowired
+    private CartAdm cartAdm;
 
     @GetMapping("/createcategory")
     public ModelAndView createcategory(CategoryDto categoryDto) {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Crear categoria");
+          maw.addObject("cartAdm", cartAdm);
         maw.addObject("vista", "category/createcategory");
         maw.addObject("categoryDto", categoryDto);
         return maw;
