@@ -70,6 +70,7 @@ public class HomeController {
         maw.addObject("vista", "inicio/perfil");
         maw.addObject("cartAdm", cartAdm);
         maw.addObject("chef",chef);
+          maw.addObject("allDishes", dishService.getAll());
         maw.addObject("allcategory", categoryService.getAll());
         return maw;
     }
