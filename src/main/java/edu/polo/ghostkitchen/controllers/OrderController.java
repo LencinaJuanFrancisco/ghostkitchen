@@ -68,7 +68,16 @@ public class OrderController {
     }
 
     Long chefId = 0L;
-    
+
+    @GetMapping("/remito")
+    public ModelAndView remito() {
+        ModelAndView modelAndView = new ModelAndView("fragments/base");
+        modelAndView.addObject("titulo", "Remito");
+        modelAndView.addObject("vista", "orden/remito");
+
+        return modelAndView;
+    }
+
     // Declarar una lista para almacenar los objetos Dish
     @GetMapping("/pedido")
     public ModelAndView pedido() {
@@ -121,15 +130,15 @@ public class OrderController {
     @GetMapping("/pedido/eliminarDish/{id}")
     public String eliminarDish(@PathVariable Long id) {
         System.out.println("ID QUE DESEO ELIMINAR DEL LIST------------------" + id);
-        // Supongamos que cada objeto Dish tiene un campo de identificación único (por ejemplo, "id")
-        // Puedes buscar el objeto que deseas eliminar por su identificación
+
+        // buscar el objeto que deseas eliminar por su identificación
         Detail dishToRemove = null;
         for (Detail detail : cartAdm.getDetailList()) {
             if (detail.getDish().getId().equals(id)) {
                 dishToRemove = detail;
                 break;
             }
-            
+
         }
 
         // Si se encuentra el objeto, eliminarlo de la lista
@@ -139,7 +148,7 @@ public class OrderController {
         if (cartAdm.getSizeList() == 0) {
             chefId = 0L;
         }
-        
+
         return "redirect:/pedido"; // Redirige a la página deseada después de eliminar el objeto
     }
 
@@ -148,14 +157,13 @@ public class OrderController {
         Order order = new Order();
         orderRepository.save(order);
 
-        //Delivery delivery = new Delivery();
+        // Delivery delivery = new Delivery();
         float prices = 0;
 
         String user = SecurityContextHolder.getContext().getAuthentication().getName();
         Ghosts userFind = userRepository.findByEmail(user);
         Client clientFind = clientRepository.findClientByUserId(userFind.getId());
         order.setClient(clientFind);
-
 
         for (Detail detail : cartAdm.getDetailList()) {
             Detail det = new Detail();
@@ -166,7 +174,7 @@ public class OrderController {
             detailRepository.save(det);
             order.setChef(detail.getDish().getChef());
 
-            //order.setPrice((detail.getCantidad() * detail.getDish().getPrice()));
+            // order.setPrice((detail.getCantidad() * detail.getDish().getPrice()));
         }
 
         order.setPrice(prices);
@@ -175,6 +183,7 @@ public class OrderController {
         orderRepository.save(order);
 
         cartAdm.limpiar();
-        return "redirect:/menu"; // Redirige a la página deseada después de vaciar la lista
+        return "redirect:/remito"; // Redirige a la página deseada después de vaciar la lista
     }
+
 }
