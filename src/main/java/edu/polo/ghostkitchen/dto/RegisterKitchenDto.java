@@ -26,6 +26,8 @@ public class RegisterKitchenDto {
     
     private String recaptcha;
     
+      private String phone;
+    
     @NotNull
     @NotEmpty(message = "Ingrese un nombre")
     private String name;

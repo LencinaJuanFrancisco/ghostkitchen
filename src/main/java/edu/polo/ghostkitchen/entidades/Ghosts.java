@@ -50,6 +50,8 @@ public class Ghosts {
     private float rank;
 
     private long history;
+    
+    private String phone;
 
     @Temporal(TemporalType.DATE)
     private Date birthday;

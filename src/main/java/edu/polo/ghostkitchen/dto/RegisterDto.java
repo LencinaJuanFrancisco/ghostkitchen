@@ -24,6 +24,8 @@ public class RegisterDto {
     private String confirm;
 
     private String recaptcha;
+    
+     private String phone;
 
     @NotNull
     @NotEmpty(message = "Ingrese un nombre")

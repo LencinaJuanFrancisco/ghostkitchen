@@ -114,6 +114,7 @@ public class AuthControler {
         u.setAddress(registerDto.getAddress());
         u.setName(registerDto.getName());
         u.setEmail(registerDto.getEmail());
+        u.setPhone(registerDto.getPhone());
         u.setPassword(codificator.encode(registerDto.getPassword()));
         u.setBirthday(registerDto.getBirthday());
         if (userRepository.existsByRole(Ghosts.GhostRole.Administrador)) {

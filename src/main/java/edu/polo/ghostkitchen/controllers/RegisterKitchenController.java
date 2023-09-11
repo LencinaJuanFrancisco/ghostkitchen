@@ -64,6 +64,7 @@ public class RegisterKitchenController {
             u.setAddress(registerDto.getAddress());
             u.setName(registerDto.getName());
             u.setEmail(registerDto.getEmail());
+            u.setPhone(registerDto.getPhone());
             u.setBirthday(registerDto.getBirthday());
             u.setPassword(codificator.encode(registerDto.getPassword()));
             u.setRole(Ghosts.GhostRole.Chef);

@@ -23,6 +23,8 @@ public class RegisterDeliveryDto {
 
     private String confirm;
 
+      private String phone;
+    
     private String recaptcha;
 
     private String licencePlate;

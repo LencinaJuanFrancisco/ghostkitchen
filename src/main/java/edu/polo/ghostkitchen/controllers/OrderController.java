@@ -79,7 +79,7 @@ public class OrderController {
         modelAndView.addObject("allDetails", cartAdm.getDetailList());
         modelAndView.addObject("allcategory", categoryService.getAll());
         modelAndView.addObject("chefId", chefId);
-        System.out.println(chefId + "ESTE ES 0");
+       
         return modelAndView;
     }
 

@@ -1,0 +1,140 @@
+<div class="container my-auto  p-3 z-3 " th:fragment="contenido">
+    <div class="container bootdey bg-white">
+        <div class="row invoice row-printable">
+            <div class="col-md-10">
+                <!-- col-lg-12 start here -->
+                <div class="panel panel-default plain" id="dash_0">
+                    <!-- Start .panel -->
+                    <div class="panel-body p30">
+                        <div class="row">
+                            <!-- Start .row -->
+                            <div class="col-lg-6">
+                                <!-- col-lg-6 start here -->
+                                <div class="invoice-logo"><img src="/images/favicon.png" alt="Logo" class="logo-img"> </div>
+                            </div>
+                            <!-- col-lg-6 end here -->
+                            <div class="col-lg-6">
+                                <!-- col-lg-6 start here -->
+                                <div class="invoice-from">
+                                    <ul class="list-unstyled text-right">
+                                        <li>GHOST KITCHEN</li>
+                                        <li>SC-Sociedad Conocida</li>
+                                        <li>Calle falsa 123</li>
+                                        <li>Posadas-Misiones</li>
+                                        <li>0364-457698</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- col-lg-6 end here -->
+                            <div class="col-lg-12">
+                                <!-- col-lg-12 start here -->
+                                <div class="invoice-details mt25">
+                                    <div class="well">
+                                        <ul class="list-unstyled mb0">
+                                            <li ><strong>Recibo nro</strong><span th:text="${order.id}"></span></li>
+                                            <li><strong>Fecha</strong> Monday, October 10th, 2015</li>
+                                            <li><strong>Fecha de entrega:</strong> Thursday, December 1th, 2015</li>
+                                            <li><strong>Estado de la entrega:</strong> <span class="label label-succees">ENTREGADO</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="container mt-5">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-4">
+                                            <ul class="list-unstyled">
+                                                <li><strong>CLIENTE</strong></li>
+                                                <li><span th:text="${order.client.user.name}"></span></li>
+                                                <li><span th:text="${order.client.user.address}"></span></li>
+                                                <li><span th:text="${order.client.user.email}"></span></li>
+                                                <li>Misiones</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <ul class="list-unstyled">
+                                                <li><strong>COCINA</strong></li>
+                                                <li><span th:text="${order.chef.user.name}"></span></li>
+                                                <li><span th:text="${order.chef.user.address}"></span></li>
+                                                <li><span th:text="${order.chef.user.email}"></span></li>
+                                                <li>Misiones</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <ul class="list-unstyled">
+                                                <li><strong>DELIVERY</strong></li>
+                                                <li><span ></span></li>
+                                                <li><span ></span></li>
+                                                <li><span ></span></li>
+                                                <li>Misiones</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="invoice-items">
+                                    <div class="table-responsive" style="overflow: hidden; outline: none;" tabindex="0">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th class="per70 text-center">Descripción</th>
+                                                    <th class="per5 text-center">Qty</th>
+                                                    <th class="per5 text-center">Uni</th>
+                                                    <th class="per25 text-center">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- <tr th:each="item : ${cart}">
+                                                    <td th:text="${item.id}"></td>
+                                                    <td class="text-center"th:text="${item.dish.name}"></td>
+                                                    <td class="text-center"th:text="${item.detail.price}"></td>
+                                                </tr> -->
+                                                <tr th:each="item : ${cart}">
+                                                    <td class="text-center" th:text="${item.dish.name}"></td>
+                                                    <td class="text-center" th:text="${item.cantidad}"></td>
+                                                    <td class="text-center" th:text="${item.dish.price}"></td>
+                                                    <td class="text-center" th:text="${item.cantidad * item.dish.price}"></td>
+                                                </tr>
+                                               
+                                               
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th colspan="2" class="text-right">Sub Total:</th>
+                                                    <th class="text-center" ></th>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="2" class="text-right">Envio:</th>
+                                                    <th class="text-center">$47.40 USD</th>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="2" class="text-right">Comisíon:</th>
+                                                    <th class="text-center">$00.00 USD</th>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="2" class="text-right">Total:</th>
+                                                    <th class="text-center">$284.4.40 USD</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="invoice-footer mt25">
+                                    <p class="text-center">Generated on Monday, October 08th, 2015 <a href="#" class="btn btn-default ml15"><i class="fa fa-print mr5"></i> Print</a></p>
+                                </div>
+                            </div>
+                            <!-- col-lg-12 end here -->
+                        </div>
+                        <!-- End .row -->
+                    </div>
+                </div>
+                <!-- End .panel -->
+            </div>
+            <!-- col-lg-12 end here -->
+        </div>
+        </div>
+
+
+</div>
+
+    <div th:fragment="script">
+
+    </div>    

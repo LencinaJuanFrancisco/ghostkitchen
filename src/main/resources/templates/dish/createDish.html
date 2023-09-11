@@ -62,7 +62,17 @@
 
 
                 </div>
+
+
+
             </div>
+        </div>
+    </div>
+    <div th:if="${errors != null}">
+        <div class="alert alert-danger">
+            <ul>
+                <li th:each="error : ${errors}" th:text="${error.defaultMessage}"></li>
+            </ul>
         </div>
     </div>
 </div>
