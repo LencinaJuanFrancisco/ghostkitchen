@@ -8,22 +8,22 @@
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 <div class="collapse navbar-collapse" id="navbarScroll">
-                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px; font-weight: bold;">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                            <a class="nav-link active hover-warning" aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/menu">Menú</a>
+                            <a class="nav-link active hover-warning" aria-current="page" href="/menu">Menú</a>
                         </li>
                         <li class="nav-item" sec:authorize="hasRole('ROLE_Chef') or hasRole('ROLE_Administrador') or hasRole('ROLE_Cliente') or hasRole('ROLE_Delivery')">
-                            <a class="nav-link active" aria-current="page" th:href="'/perfil/' + ${chefId}">Perfil</a>
+                            <a class="nav-link active hover-warning" aria-current="page" th:href="'/perfil/' + ${chefId}">Perfil</a>
                         </li>
                         </li>
                         <li class="nav-item" sec:authorize="hasRole('ROLE_Chef') or hasRole('ROLE_Administrador')">
-                            <a class="nav-link active" aria-current="page" href="/createDish">Crear plato</a>
+                            <a class="nav-link active hover-warning" aria-current="page" href="/createDish">Crear plato</a>
                         </li>
                         <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_Chef') or hasRole('ROLE_Administrador')">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle hover-warning text-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Categorías
                             </a>
                             <ul class="dropdown-menu">
@@ -43,26 +43,52 @@
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item" sec:authorize="isAnonymous()">
-                            <a class="nav-link active" aria-current="page" href="/login">
-                                <i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión
+                            <a class="nav-link active hover-warning" aria-current="page" href="/login" style="font-weight: bold">
+                                <i class="fa-solid fa-right-to-bracket" ></i> Iniciar sesión
                             </a>
                         </li>
                         <li class="nav-item" sec:authorize="isAnonymous()">
-                            <a class="nav-link active" aria-current="page" href="/register">
+                            <a class="nav-link active hover-warning" aria-current="page" href="/register" style="font-weight: bold">
                                 <i class="fa-solid fa-user-plus"></i> Registrarse
                             </a>
                         </li>
                 <li class="nav-item ms-auto" sec:authorize="isAuthenticated()">
                     <form class="form-inline" th:action="@{/logout}" method="POST">
-                        <button class="btn btn-link nav-link active text-white" type="submit" onclick="return confirm('¿Seguro de cerrar sesión?')">
-                            <i class="fa-solid text-white fa-right-from-bracket"></i> Cerrar sesión
-                        </button>
+                       
+                            
+                            <button type="button" class="btn btn-link nav-link active hover-warning text-white" style="font-weight: bold" data-bs-toggle="modal" th:data-bs-target="'#logout'">
+                                           <i class="fa-solid text-white fa-right-from-bracket" ></i> Cerrar sesión
+                                        </button>
+                            
+                         <!-- Modal -->
+                        <div class="modal fade" th:id="'logout'" tabindex="-1" aria-labelledby="'exampleModalLabel'" aria-hidden="true" >
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-size: 24px; font-weight: bold;">Logout</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    
+                                       
+                                        <h5 style=" font-size: 1.2em;">
+                                            ¿Seguro que desea cerrar sesión?</h5>
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+
+                                        <button type="submit" class="btn btn-dark mt-auto">Cerrar sesión</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
                     </form>
                 </li>
                 <li class="nav-item position-relative custom-margin-right" sec:authorize="hasRole('ROLE_Chef') or hasRole('ROLE_Administrador') or hasRole('ROLE_Cliente') or hasRole('ROLE_Delivery')">
-                    <a class="nav-link active" aria-current="page" href="/pedido">
+                    <a class="nav-link active " aria-current="page" href="/pedido">
                         <i class="fas fa-shopping-cart" style="font-size: 25px;"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
                             <div th:if="${cartAdm != null}">
                                 <!-- Llamar a getSizeList() solo si cartAdm no es nulo -->
                                 <th:block th:text="${cartAdm.getSizeList()}"></th:block>

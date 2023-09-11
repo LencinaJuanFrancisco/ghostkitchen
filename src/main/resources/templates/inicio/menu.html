@@ -27,7 +27,7 @@
                                 <img class="card-img-top custom-img" th:src="${'/images/dishes/' + dish.image}" />
                                 <!-- Product details-->
                                 <div class="card-body p-4">
-                                    <div class="text-center" >
+                                    <div class="text-center justify-content-center"  >
                                         <!-- Product name-->
                                         <h5 class="fw-bolder" th:text='${dish.name}'></h5>
                                         <!-- Product reviews-->
@@ -43,7 +43,7 @@
                                         <span th:text="'$ ' + ${dish.price}">
 
                                         </span>
-                                        <p class="card-text"  th:text="${dish.description}" style="width: 170px; font-size: 0.75em; text-align: center;">
+                                        <p class="card-text"  th:text="${dish.description}" style="width: 180px; font-size: 0.75em; text-align: center;">
 
                                         </p>
 
@@ -51,7 +51,7 @@
 
                                 </div>
                                 <!-- Product actions-->
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center" sec:authorize="hasRole('ROLE_Cliente')">
                                     <div class="text-center">
                                         <button type="button" class="btn btn-outline-dark mt-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                             Pedir
@@ -63,7 +63,9 @@
                             </div>
                         </div>
                         <!-- Modal -->
+
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">

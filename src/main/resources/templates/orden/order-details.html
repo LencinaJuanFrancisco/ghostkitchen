@@ -69,10 +69,10 @@
 
 
         <div class="text-center">
-            <a th:if="${chefId != 0}" th:href="'/perfil/' + ${chefId}" class="btn btn-secondary">Seguir Comprando</a>
+            <a th:if="${chefId != 0}" th:href="'/perfil/' + ${chefId}" class="btn btn-outline-secondary mt-auto">Seguir Comprando</a>
             <a th:if="${chefId == 0}" href="/menu"  class="btn btn-secondary">Comprar</a>
-            <a th:if="${chefId != 0}" href="/createOrden" class="btn btn-info">Finalizar Compra</a>
-            <a th:if="${chefId != 0}" href="/vaciarLista" class="btn btn-danger">Eliminar Orden</a>
+            <a th:if="${chefId != 0}" href="/createOrden" class="btn btn-outline-warning mt-auto">Finalizar Compra</a>
+            <a th:if="${chefId != 0}" href="/vaciarLista" class="btn btn-outline-danger mt-auto">Eliminar Orden</a>
         </div>
     </div>
 

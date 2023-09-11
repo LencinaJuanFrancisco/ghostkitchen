@@ -104,3 +104,10 @@ hr.my-5 {
     height: 140px; /* Ajusta la altura deseada */
     object-fit: cover; /* Esto asegurará que la imagen se ajuste al tamaño sin distorsionarse */
 }
+
+.hover-warning:hover {
+    background-color: #ffc107; /* Color de fondo de advertencia de Bootstrap */
+    color: #fff; /* Color de texto en hover */
+    border-radius: 20px;
+     font-weight: bold;
+}
