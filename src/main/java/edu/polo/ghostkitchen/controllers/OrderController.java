@@ -75,7 +75,6 @@ public class OrderController {
 
     Long chefId = 0L;
     List<Detail> cart ;
-
     @GetMapping("/remito")
     public ModelAndView remito(HttpSession session) {
 
@@ -84,12 +83,6 @@ public class OrderController {
       
         // String fechaHoy = (String) session.getAttribute("fechaHoy");
         
-
-        System.out.println("------------------------------ ORDEN:   " + order);
-        System.out.println("------------------------------ "); 
-       
-        System.out.println("------------------------------ ");
-         System.out.println("------------------------------ card:   " + cart);
 
         ModelAndView modelAndView = new ModelAndView("fragments/base");
         modelAndView.addObject("titulo", "Remito");
@@ -117,6 +110,16 @@ public class OrderController {
         System.out.println(chefId + "ESTE ES 0");
         return modelAndView;
     }
+ @GetMapping("/finalizarRemito")
+    public String finalizarRemito(HttpSession session) {
+
+        cart.clear();
+        session.removeAttribute("order");
+        
+
+        return "redirect:/menu";
+    }
+
 
     @PostMapping("/pedido/{dishId}")
     public String addDetailToOrder(@PathVariable Long dishId, @RequestParam("cantidad") Integer cantidad,
