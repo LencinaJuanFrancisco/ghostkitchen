@@ -51,6 +51,9 @@ public class HomeController {
 
     @RequestMapping("/menu")
     public ModelAndView menu() {
+        
+         List<Dish> randomDishes = dishService.getRandomDishes();
+        
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Menú");
@@ -58,6 +61,7 @@ public class HomeController {
         maw.addObject("cartAdm", cartAdm);
         maw.addObject("allcategory", categoryService.getAll());
         maw.addObject("allDishes", dishService.getAll());
+         maw.addObject("randomDishes", randomDishes);
         return maw;
     }
 
@@ -66,7 +70,7 @@ public class HomeController {
         
          Chef chef = chefService.getById(chefId);
        List<Dish> dish =  dishService.getAllById(chefId);
-         System.out.println(dish + "AAAAAAAAAAAAAAAAAAAAAAAAA");
+      
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Perfil");

@@ -79,7 +79,7 @@ body::before {
     width: 80px; /* Ajusta el ancho del logo según tus necesidades */
     height: auto; /* Ajusta la altura automáticamente según el ancho */
     margin-right: 10px; /* Espacio entre el logo y el texto */
-    background-color: #000000;
+   
 }
 
 .navbar-nav li.nav-item a.nav-link {
@@ -99,3 +99,8 @@ hr.my-5 {
     margin-right: 25px;
 }
 
+.custom-img {
+    width: 100%; /* Ajusta el ancho deseado */
+    height: 140px; /* Ajusta la altura deseada */
+    object-fit: cover; /* Esto asegurará que la imagen se ajuste al tamaño sin distorsionarse */
+}
