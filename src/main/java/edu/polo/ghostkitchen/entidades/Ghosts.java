@@ -56,13 +56,15 @@ public class Ghosts {
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     Set<Chef> chefs;
 
-    @OneToMany(mappedBy = "user")
+
+
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     Set<Delivery> deliveries;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     Set<Client> clients;
 
     public enum GhostRole {

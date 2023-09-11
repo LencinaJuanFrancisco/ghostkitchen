@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg bg-body-secondary" th:fragment="header">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-lg bg-body-secondary" th:fragment="contenido" th:unless="${ocultarEncabezado}">
+    <div class="container-fluid" >
         <img src="/images/favicon.png" alt="Logo" class="logo-img"> 
         <a class="navbar-brand" href="/">Ghost Kitchen</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,11 +63,15 @@
                     <a class="nav-link active" aria-current="page" href="/pedido">
                         <i class="fas fa-shopping-cart" style="font-size: 25px;"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            <th:block th:text="${cartAdm.getSizeList()}"></th:block>
-                            <span class="visually-hidden">unread messages</span>
+                            <div th:if="${cartAdm != null}">
+                                <!-- Llamar a getSizeList() solo si cartAdm no es nulo -->
+                                <th:block th:text="${cartAdm.getSizeList()}"></th:block>
+                                <span class="visually-hidden">unread messages</span>
+                            </div>
                         </span>
                     </a>
                 </li>
+               
                 
             </ul>
         </div>
