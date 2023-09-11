@@ -3,8 +3,12 @@ package edu.polo.ghostkitchen.controllers;
 import edu.polo.ghostkitchen.entidades.Chef;
 import edu.polo.ghostkitchen.entidades.Client;
 import edu.polo.ghostkitchen.entidades.Delivery;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import ch.qos.logback.core.model.Model;
 import edu.polo.ghostkitchen.services.DishService;
 import edu.polo.ghostkitchen.services.OrderService;
+import jakarta.servlet.http.HttpSession;
 import edu.polo.ghostkitchen.entidades.Detail;
 import edu.polo.ghostkitchen.entidades.Dish;
 import edu.polo.ghostkitchen.classes.CartAdm;
@@ -68,12 +74,32 @@ public class OrderController {
     }
 
     Long chefId = 0L;
+    List<Detail> cart ;
 
     @GetMapping("/remito")
-    public ModelAndView remito() {
+    public ModelAndView remito(HttpSession session) {
+
+        // Recupera los objetos de la sesión
+        Order order = (Order) session.getAttribute("order");
+      
+        // String fechaHoy = (String) session.getAttribute("fechaHoy");
+        
+
+        System.out.println("------------------------------ ORDEN:   " + order);
+        System.out.println("------------------------------ "); 
+       
+        System.out.println("------------------------------ ");
+         System.out.println("------------------------------ card:   " + cart);
+
         ModelAndView modelAndView = new ModelAndView("fragments/base");
         modelAndView.addObject("titulo", "Remito");
         modelAndView.addObject("vista", "orden/remito");
+         modelAndView.addObject("cart", cart);
+        // Puedes agregar los objetos al modelo para usarlos en tu vista
+        modelAndView.addObject("order", order);
+       
+
+        // modelAndView.addObject("fecha", fechaHoy);
 
         return modelAndView;
     }
@@ -153,7 +179,7 @@ public class OrderController {
     }
 
     @GetMapping("/createOrden")
-    public String createOrden() {
+    public String createOrden(HttpSession session) {
         Order order = new Order();
         orderRepository.save(order);
 
@@ -182,7 +208,24 @@ public class OrderController {
 
         orderRepository.save(order);
 
-        cartAdm.limpiar();
+        // Guarda los objetos en la sesión
+        session.setAttribute("order", order);
+       
+        //guardo todo lo que esta en el carrito par rellenar el remito
+        cart = cartAdm.getDetailList();
+        // // Obtiene la fecha actual
+        // Date fechaActual = new Date(0,0,0);
+        // // Define el formato deseado para la fecha
+        // SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        // // Formatea la fecha actual en el formato "dd/MM/yyyy"
+        // String fechaFormateada = formatoFecha.format(fechaActual);
+        // // Almacena la fecha formateada en la sesión
+        // session.setAttribute("fechaHoy", fechaFormateada);
+        System.out.println("------------vvvvv------------");
+        System.out.println(cart);
+        System.out.println("----------xxxxx---------------");
+
+        //cartAdm.limpiar();
         return "redirect:/remito"; // Redirige a la página deseada después de vaciar la lista
     }
 
