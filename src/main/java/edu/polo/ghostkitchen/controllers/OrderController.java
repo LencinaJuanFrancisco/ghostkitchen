@@ -75,6 +75,7 @@ public class OrderController {
 
     Long chefId = 0L;
     List<Detail> cart ;
+    
     @GetMapping("/remito")
     public ModelAndView remito(HttpSession session) {
 
@@ -90,6 +91,7 @@ public class OrderController {
          modelAndView.addObject("cart", cart);
         // Puedes agregar los objetos al modelo para usarlos en tu vista
         modelAndView.addObject("order", order);
+       modelAndView.addObject("ocultarEncabezado", true);
        
 
         // modelAndView.addObject("fecha", fechaHoy);
