@@ -35,5 +35,7 @@ public class RegisterDto {
 
     @Temporal(TemporalType.DATE)
     private Date birthday;
+    
+  
 
 }

@@ -7,6 +7,7 @@ import jakarta.validation.constraints.*;
 import java.util.Date;
 import lombok.*;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @Confirm
@@ -26,6 +27,8 @@ public class RegisterKitchenDto {
     
     private String recaptcha;
     
+    private String description;
+    
     @NotNull
     @NotEmpty(message = "Ingrese un nombre")
     private String name;
@@ -39,5 +42,8 @@ public class RegisterKitchenDto {
     
     @Temporal(TemporalType.DATE)
     private Date birthday;
+    
+        private MultipartFile image;
+
     
 }

@@ -30,12 +30,16 @@ public class HomeController {
 
     @RequestMapping("/")
     public ModelAndView home() {
+        
+         List<Chef> randomChefs = chefService.getRandomChefs();
+        
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Inicio");
         maw.addObject("vista", "inicio/home");
         maw.addObject("cartAdm", cartAdm);
         maw.addObject("allcategory", categoryService.getAll());
+                 maw.addObject("randomChefs", randomChefs);
         /*
         long random = (long) ((Math.random() * (cursoRepositorio.count() - 1)) + 1);
         maw.addObject("curso", cursoServicio.getById(random));
