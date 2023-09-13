@@ -1,6 +1,8 @@
 package edu.polo.ghostkitchen.repositories;
 
 import edu.polo.ghostkitchen.entidades.*;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,4 +19,6 @@ public interface DishRepository extends CrudRepository<Dish, Long> {
 
     Dish findByPrice(Long price);
 
+    @Query("SELECT COUNT(*) FROM Dish")
+int countDishes();
 }

@@ -1,6 +1,7 @@
 package edu.polo.ghostkitchen.controllers;
 
 import edu.polo.ghostkitchen.classes.CartAdm;
+import edu.polo.ghostkitchen.classes.DashboarInfo;
 import edu.polo.ghostkitchen.entidades.Category;
 import edu.polo.ghostkitchen.repositories.CategoryRepository;
 import edu.polo.ghostkitchen.dto.CategoryDto;
@@ -16,6 +17,9 @@ public class AdminController implements WebMvcConfigurer {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private DashboarInfo dashboarInfo;
 
     @Autowired
     private CategoryValidator categoryValidator;
@@ -35,19 +39,7 @@ public class AdminController implements WebMvcConfigurer {
         return maw;
     }
 
-    /*  @PostMapping("/createcategory")
-    public ModelAndView registrar(@RequestParam(name = "g-recaptcha-response") String recaptchaResponse, @Valid CategoryDto categoryDto, BindingResult br, RedirectAttributes ra, HttpServletRequest request) {
-        // ... Validación de reCAPTCHA y otros controles de errores ...
-
-        // Registrar al usuario y guardar en la base de datos
-        Category u = new Category();
-        u.setCategory(categoryDto.getCategory());
-        u.setDescription(categoryDto.getDescription());
-        categoryRepository.save(u);
-
-        // Redirigir al usuario a la página de inicio de sesión
-        return new ModelAndView("redirect:/home");
-    }*/
+    
     @PostMapping("/createcategory")
     public ModelAndView registrar(CategoryDto categoryDto, BindingResult br) {
         // ... Validación de otros controles de errores ...
@@ -72,17 +64,36 @@ public class AdminController implements WebMvcConfigurer {
         // Redirigir al usuario a alguna página después del registro exitoso
         return new ModelAndView("redirect:/");
     }
-    /*
-@GetMapping
-public ModelAndView index() {
+    
+@GetMapping("/dashboard/home")
+public ModelAndView dashboard() {
    ModelAndView maw = new ModelAndView();
     maw.setViewName("fragments/base");
-     maw.addObject("titulo","Categorias");
-    maw.addObject("vista","category/index");
-  maw.addObject("allcategory",categoryService.getAll());
-    // Registrar la categoría y guardar en la base de datos(
-    System.out.println("AAAAAAAAAAAAAAAAAAAAAA"+categoryService.getAll());
+     maw.addObject("titulo","Dashboar");
+    maw.addObject("vista","fragments/homeDash");
+  maw.addObject("ordenes", dashboarInfo.getCantidadDeOrdenes());
+  maw.addObject("totalVentas", dashboarInfo.getTotalDeVentas());
+  maw.addObject("ganancias", dashboarInfo.getGanancia());
+   maw.addObject("clientesTotales", dashboarInfo.getCantidadDeUsuarios());
+  maw.addObject("compradores", dashboarInfo.getCantidadDeCompradores());
+maw.addObject("cocinas", dashboarInfo.getCantidadDeCocineros());
+maw.addObject("deliveries", dashboarInfo.getCantidadDeDelivery());
+maw.addObject("cantidadDePlatos", dashboarInfo.getCantidadDePlatos());
+maw.addObject("platoMasVendido", dashboarInfo.getPlatoMasVendido());
+maw.addObject("clienteMasCompra", dashboarInfo.getClienteQueMasCompro());
+ maw.addObject("chefMasVendido", dashboarInfo.getCocinaMasVendida());
+
+System.out.println("dddddddddddddddddddddddddddddddd "+  dashboarInfo.getClienteQueMasCompro()+ " vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
           
   return maw;
-}*/
+}
+@GetMapping("/dashboard/usuarios")
+public ModelAndView usuarios() {
+   
+   ModelAndView maw = new ModelAndView();
+   maw.setViewName("fragments/homeDash");
+     maw.addObject("titulo","Categorias");
+   maw.addObject("dash", "fragments/usuarioDash"); // Ubicación completa del fragmento
+   return maw;
+}
 }
