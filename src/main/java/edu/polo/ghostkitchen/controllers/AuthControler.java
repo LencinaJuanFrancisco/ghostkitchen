@@ -60,6 +60,7 @@ public class AuthControler {
         //Se limpia el carrito 
         cartAdm.limpiar();
         
+        
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Iniciar sesión");
@@ -73,6 +74,8 @@ public class AuthControler {
     }
         
         
+        
+        
 //        String username = SecurityContextHolder.getContext().getAuthentication().getName();
 //        Ghosts user = userRepository.findByUsername(username);
 //        session.setAttribute("usuario", user);
@@ -84,7 +87,7 @@ public class AuthControler {
     }
 
     @GetMapping({"/loginSuccess"})
-    public RedirectView logincheck() {
+    public RedirectView logincheck() {    
         return new RedirectView("/");
     }
 

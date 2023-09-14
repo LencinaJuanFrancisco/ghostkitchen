@@ -35,19 +35,7 @@ public class AdminController implements WebMvcConfigurer {
         return maw;
     }
 
-    /*  @PostMapping("/createcategory")
-    public ModelAndView registrar(@RequestParam(name = "g-recaptcha-response") String recaptchaResponse, @Valid CategoryDto categoryDto, BindingResult br, RedirectAttributes ra, HttpServletRequest request) {
-        // ... Validación de reCAPTCHA y otros controles de errores ...
-
-        // Registrar al usuario y guardar en la base de datos
-        Category u = new Category();
-        u.setCategory(categoryDto.getCategory());
-        u.setDescription(categoryDto.getDescription());
-        categoryRepository.save(u);
-
-        // Redirigir al usuario a la página de inicio de sesión
-        return new ModelAndView("redirect:/home");
-    }*/
+  
     @PostMapping("/createcategory")
     public ModelAndView registrar(CategoryDto categoryDto, BindingResult br) {
         // ... Validación de otros controles de errores ...
@@ -72,17 +60,5 @@ public class AdminController implements WebMvcConfigurer {
         // Redirigir al usuario a alguna página después del registro exitoso
         return new ModelAndView("redirect:/");
     }
-    /*
-@GetMapping
-public ModelAndView index() {
-   ModelAndView maw = new ModelAndView();
-    maw.setViewName("fragments/base");
-     maw.addObject("titulo","Categorias");
-    maw.addObject("vista","category/index");
-  maw.addObject("allcategory",categoryService.getAll());
-    // Registrar la categoría y guardar en la base de datos(
-    System.out.println("AAAAAAAAAAAAAAAAAAAAAA"+categoryService.getAll());
-          
-  return maw;
-}*/
+   
 }

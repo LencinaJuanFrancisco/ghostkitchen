@@ -121,3 +121,9 @@ hr.my-5 {
 .custom-left-align {
     text-align: left;
 }
+
+.modal2 {
+    z-index: 1050; /* o cualquier otro valor adecuado */
+}
+
+

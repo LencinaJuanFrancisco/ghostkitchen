@@ -27,7 +27,7 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/", "/categories", "/home", "/pedido/**", "/finalizarRemito", "/vaciarLista", "/menu",
-                         "/register", "/dishdetail", "/createDish", "/createcategory", "/perfil", "/perfil/**", "/registerKitchen",
+                         "/register", "/dishdetail", "/createDish", "/createcategory", "/perfil", "/perfilChef", "/registerKitchen",
                          "/registerDelivery", "/createOrden", "/remito", "/css/**", "/images/**", "/images/dishes/**", "/images/chefs/**")
                 .permitAll()
                 .anyRequest().authenticated()
