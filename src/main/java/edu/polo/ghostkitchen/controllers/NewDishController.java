@@ -70,7 +70,7 @@ public class NewDishController {
     }
 
     @PostMapping("/createDish")
-    public ModelAndView creationDish(@RequestParam("image") MultipartFile image, @Valid DishDto dishDto, BindingResult br, RedirectAttributes ra, HttpServletRequest request) {
+    public ModelAndView creationDish(@RequestParam("image") MultipartFile image, @Valid DishDto dishDto, BindingResult br, RedirectAttributes ra, HttpServletRequest request) throws InterruptedException {
 
         if (image.isEmpty()) {
             br.reject("image", "Por favor, cargue una imagen");
@@ -105,6 +105,8 @@ public class NewDishController {
         d.setImage(imagen);
         dishRepository.save(d);
 
+         Thread.sleep(1500);
+        
         ra.addFlashAttribute("message", "Plato creado exitosamente");
         return new ModelAndView("redirect:/menu");
     }

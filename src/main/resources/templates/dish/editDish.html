@@ -1,0 +1,72 @@
+<div class="container my-auto p-3" th:fragment="contenido">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-5">
+            <div class="card">
+
+                <div style="text-align: center;">
+                    <div class="card-header" style="font-weight: bold; font-size: 1.2em;">
+                        Editar plato
+                    </div>
+                </div>
+                <form class="card-body" th:action="@{'/editDish/{id}' (id=${dish.id})}" th:object="${dish}" th:method="PUT" enctype="multipart/form-data">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nombre del plato</label>
+                        <input type="text"  th:field="*{name}" class="form-control" id="name" name="name">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Precio (en pesos)</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" class="form-control" id="price" name="price" step="10" placeholder="0">
+                        </div>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="description" name="description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rank" class="form-label">Ranking</label>
+                        <input type="number" class="form-control" id="rank" name="rank" min="1" max="10">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('rank')}" th:errors="*{rank}"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Categoría</label>
+                        <select class="form-select" id="category" name="category">
+                            <option th:each="category : ${allCategories}" th:value="${category.id}" th:text="${category.category}"></option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Imagen del plato</label>
+                        <input type="file" class="form-control" id="image" name="image">
+                    </div>
+                    <div class="mb-3">
+                        <label for="disponibility" class="form-label"></label>
+                        <div class="form-check custom-checkbox"> <!-- Agrega la clase "custom-checkbox" -->
+                            <input type="checkbox" class="form-check-input custom-control-input" id="disponibility" name="disponibility" th:field="*{disponibility}">
+                            <label class="form-check-label custom-control-label" for="disponibility">Disponible</label>
+                        </div>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('disponibility')}" th:errors="*{disponibility}"></div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary mx-2">Crear plato</button>
+                    </div>
+                </form>
+                <div class="card-footer text-center p-3">
+
+                    <div class="card-footer text-center p-3">
+                        <a href="/" class="text-decoration-none fw-bold h5">Eliminar plato</a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</script>
+<script th:fragment="script">
+</script>

@@ -23,8 +23,7 @@ public class AdminController implements WebMvcConfigurer {
 
     @Autowired
     private CategoryValidator categoryValidator;
-    
-       
+
     @Autowired
     private CartAdm cartAdm;
 
@@ -33,12 +32,11 @@ public class AdminController implements WebMvcConfigurer {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Crear categoria");
-          maw.addObject("cartAdm", cartAdm);
+        maw.addObject("cartAdm", cartAdm);
         maw.addObject("vista", "category/createcategory");
         maw.addObject("categoryDto", categoryDto);
         return maw;
     }
-
 
     @PostMapping("/createcategory")
     public ModelAndView registrar(CategoryDto categoryDto, BindingResult br) {
@@ -65,38 +63,37 @@ public class AdminController implements WebMvcConfigurer {
         return new ModelAndView("redirect:/");
     }
 
-    
-@GetMapping("/dashboard/home")
-public ModelAndView dashboard() {
-   ModelAndView maw = new ModelAndView();
-    maw.setViewName("fragments/base");
-     maw.addObject("titulo","Dashboar");
-    maw.addObject("vista","fragments/homeDash");
-  maw.addObject("ordenes", dashboarInfo.getCantidadDeOrdenes());
-  maw.addObject("totalVentas", dashboarInfo.getTotalDeVentas());
-  maw.addObject("ganancias", dashboarInfo.getGanancia());
-   maw.addObject("clientesTotales", dashboarInfo.getCantidadDeUsuarios());
-  maw.addObject("compradores", dashboarInfo.getCantidadDeCompradores());
-maw.addObject("cocinas", dashboarInfo.getCantidadDeCocineros());
-maw.addObject("deliveries", dashboarInfo.getCantidadDeDelivery());
-maw.addObject("cantidadDePlatos", dashboarInfo.getCantidadDePlatos());
-maw.addObject("platoMasVendido", dashboarInfo.getPlatoMasVendido());
-maw.addObject("clienteMasCompra", dashboarInfo.getClienteQueMasCompro());
- maw.addObject("chefMasVendido", dashboarInfo.getCocinaMasVendida());
+    @GetMapping("/dashboard/home")
+    public ModelAndView dashboard() throws InterruptedException {
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("fragments/base");
+        maw.addObject("titulo", "Dashboar");
+        maw.addObject("vista", "fragments/homeDash");
+        maw.addObject("ordenes", dashboarInfo.getCantidadDeOrdenes());
+        maw.addObject("totalVentas", dashboarInfo.getTotalDeVentas());
+        maw.addObject("ganancias", dashboarInfo.getGanancia());
+        maw.addObject("clientesTotales", dashboarInfo.getCantidadDeUsuarios());
+        maw.addObject("compradores", dashboarInfo.getCantidadDeCompradores());
+        maw.addObject("cocinas", dashboarInfo.getCantidadDeCocineros());
+        maw.addObject("deliveries", dashboarInfo.getCantidadDeDelivery());
+        maw.addObject("cantidadDePlatos", dashboarInfo.getCantidadDePlatos());
+        maw.addObject("platoMasVendido", dashboarInfo.getPlatoMasVendido());
+        maw.addObject("clienteMasCompra", dashboarInfo.getClienteQueMasCompro());
+        maw.addObject("chefMasVendido", dashboarInfo.getCocinaMasVendida());
 
+        Thread.sleep(1000);
 
-          
-  return maw;
+        return maw;
 
-   
-}
-@GetMapping("/dashboard/usuarios")
-public ModelAndView usuarios() {
-   
-   ModelAndView maw = new ModelAndView();
-   maw.setViewName("fragments/homeDash");
-     maw.addObject("titulo","Categorias");
-   maw.addObject("dash", "fragments/usuarioDash"); // Ubicación completa del fragmento
-   return maw;
-}
+    }
+
+    @GetMapping("/dashboard/usuarios")
+    public ModelAndView usuarios() {
+
+        ModelAndView maw = new ModelAndView();
+        maw.setViewName("fragments/homeDash");
+        maw.addObject("titulo", "Categorias");
+        maw.addObject("dash", "fragments/usuarioDash"); // Ubicación completa del fragmento
+        return maw;
+    }
 }

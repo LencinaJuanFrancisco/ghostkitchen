@@ -57,7 +57,7 @@ public class RegisterKitchenController {
     }
 
     @PostMapping("/registerKitchen")
-    public ModelAndView registrarCocina(@RequestParam("image") MultipartFile image, @RequestParam(name = "g-recaptcha-response") String recaptchaResponse, Date birthday, @Valid RegisterDto registerDto, @Valid RegisterKitchenDto registerKitchenDto, BindingResult br, RedirectAttributes ra, HttpServletRequest request) {
+    public ModelAndView registrarCocina(@RequestParam("image") MultipartFile image, @RequestParam(name = "g-recaptcha-response") String recaptchaResponse, Date birthday, @Valid RegisterDto registerDto, @Valid RegisterKitchenDto registerKitchenDto, BindingResult br, RedirectAttributes ra, HttpServletRequest request) throws InterruptedException {
 
         if (image.isEmpty()) {
            
@@ -102,7 +102,7 @@ public class RegisterKitchenController {
            
 
             chefRepository.save(c);
-
+             Thread.sleep(1500);
         }
         ra.addFlashAttribute("message", "Usuario creado exitosamente");
         return new ModelAndView("redirect:/login");
