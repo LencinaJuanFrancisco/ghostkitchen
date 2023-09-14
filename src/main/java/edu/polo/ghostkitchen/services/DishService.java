@@ -24,6 +24,10 @@ public class DishService {
     @Autowired
     private DishRepository dishRepository;
 
+    public void save(Dish dish) {
+        dishRepository.save(dish);
+    }
+
     public Dish getById(Long id) {
         return dishRepository.findById(id).orElse(null);
     }
@@ -61,23 +65,44 @@ public class DishService {
     }
 
     public List<Dish> getRandomDishes() {
-    List<Dish> allDishes = (List<Dish>) dishRepository.findAll();
+        List<Dish> allDishes = (List<Dish>) dishRepository.findAll();
 
-    List<Dish> randomDishes = new ArrayList<>(allDishes);
+        List<Dish> randomDishes = new ArrayList<>(allDishes);
 
-    Random random = new Random();
-    for (int i = randomDishes.size() - 1; i > 0; i--) {
-        int j = random.nextInt(i + 1); // Usamos nextInt para obtener un índice aleatorio
-        // Intercambiamos los elementos en las posiciones i y j
-        Dish temp = randomDishes.get(i);
-        randomDishes.set(i, randomDishes.get(j));
-        randomDishes.set(j, temp);
+        Random random = new Random();
+        for (int i = randomDishes.size() - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1); // Usamos nextInt para obtener un índice aleatorio
+            // Intercambiamos los elementos en las posiciones i y j
+            Dish temp = randomDishes.get(i);
+            randomDishes.set(i, randomDishes.get(j));
+            randomDishes.set(j, temp);
+        }
+
+        return randomDishes;
     }
-
-    return randomDishes;
-}
 
     public List<Dish> getDishesByCategory(Category category) {
         return dishRepository.findByCategory(category);
+    }
+
+    public void update(Dish dishToUpdate) {
+        // Verifica si el plato que se va a actualizar existe en la base de datos
+        Dish existingDish = dishRepository.findById(dishToUpdate.getId()).orElse(null);
+
+        if (existingDish != null) {
+            // Actualiza los campos del plato existente con los valores del plato a actualizar
+            existingDish.setName(dishToUpdate.getName());
+            existingDish.setPrice(dishToUpdate.getPrice());
+            existingDish.setDescription(dishToUpdate.getDescription());
+            existingDish.setCategory(dishToUpdate.getCategory());
+            existingDish.setDisponibility(dishToUpdate.isDisponibility());
+
+            // Guarda el plato actualizado en la base de datos
+            dishRepository.save(existingDish);
+        } else {
+            // Maneja el caso en el que el plato a actualizar no existe en la base de datos
+            // Puedes lanzar una excepción o realizar otra acción según tus necesidades.
+            throw new IllegalArgumentException("El plato a actualizar no existe en la base de datos.");
+        }
     }
 }

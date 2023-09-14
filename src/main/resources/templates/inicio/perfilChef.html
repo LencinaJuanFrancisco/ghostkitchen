@@ -109,13 +109,12 @@
                                         <div class="d-flex flex-row align-items-center mb-1">
                                             <h4 class="mb-1 me-1" th:text="'$ ' + ${di.price}"></h4>
 
-
                                         </div>
                                         <h6 class="text-success">Envío bonificado</h6>
                                         <div class="d-flex flex-column mt-4">
 
                                             <button type="button" class="btn btn-dark mt-auto mb-2" data-bs-toggle="modal" th:data-bs-target="'#exampleModal2' + ${stat.index}">Detalles</button>
-
+                                            <a th:href="@{'/editDish/' + ${di.id}}" class="btn btn-dark mt-auto mb-2">Editar</a>
                                             <button type="button" class="btn btn-outline-dark mt-auto" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${stat.index}" sec:authorize="hasRole('ROLE_Cliente')">
                                                 Pedir
                                             </button>

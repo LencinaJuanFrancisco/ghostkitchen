@@ -115,7 +115,7 @@ public class HomeController {
     public ModelAndView perfil(HttpSession session) {
 
       String username = SecurityContextHolder.getContext().getAuthentication().getName(); 
-        System.out.println("OOOOOOOOOOOOOOOO"+ (username) + "OOOOOOOOOOOOOOOOOOOOOOOOOO");
+       
          Ghosts userFind = userRepository.findByEmail(username);
          Chef chefFind = chefService.findChefsByUserId(userFind.getId());
          session.setAttribute("userLogged", chefFind);
