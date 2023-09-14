@@ -16,6 +16,10 @@ public class Chef {
 
     private String web;
     private String schedules;
+    private String description;
+    
+    @Column(name = "image")
+    private String image;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Ghosts user;

@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class RegisterKitchenController {
@@ -34,7 +37,7 @@ public class RegisterKitchenController {
 
     @Autowired
     private GhostsRepository userRepository;
-    
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -54,10 +57,15 @@ public class RegisterKitchenController {
     }
 
     @PostMapping("/registerKitchen")
-    public ModelAndView registrarCocina(@RequestParam(name = "g-recaptcha-response") String recaptchaResponse,Date birthday, @Valid RegisterDto registerDto, @Valid RegisterKitchenDto registerKitchenDto, BindingResult br, RedirectAttributes ra, HttpServletRequest request) {
+    public ModelAndView registrarCocina(@RequestParam("image") MultipartFile image, @RequestParam(name = "g-recaptcha-response") String recaptchaResponse, Date birthday, @Valid RegisterDto registerDto, @Valid RegisterKitchenDto registerKitchenDto, BindingResult br, RedirectAttributes ra, HttpServletRequest request) {
+
+        if (image.isEmpty()) {
+           
+            br.reject("image", "Por favor, cargue una imagen");
+        }
 
         if (br.hasErrors()) {
-
+          
         } else {
 
             Ghosts u = new Ghosts();
@@ -68,11 +76,31 @@ public class RegisterKitchenController {
             u.setPassword(codificator.encode(registerDto.getPassword()));
             u.setRole(Ghosts.GhostRole.Chef);
             userRepository.save(u);
-
+           
             Chef c = new Chef();
             c.setWeb(registerKitchenDto.getWeb());
             c.setSchedules(registerKitchenDto.getSchedules());
+             c.setDescription(registerKitchenDto.getDescription());
             c.setUser(u);
+            c = chefRepository.save(c);
+           
+            String tipo = image.getContentType();
+            String extension = "." + tipo.substring(tipo.indexOf('/') + 1, tipo.length());
+            String imagen = "chef" + c.getId() + extension;
+            String path = Paths.get("src/main/resources/static/images/chefs", imagen).toAbsolutePath().toString();
+            ModelAndView mav = this.registerKitchen(registerKitchenDto);
+
+            try {
+                image.transferTo(new File(path));
+            } catch (Exception e) {
+                mav.addObject("error", "No se pudo guardar la imagen");
+                return mav;
+            }
+         
+            c.setImage(imagen);
+
+           
+
             chefRepository.save(c);
 
         }

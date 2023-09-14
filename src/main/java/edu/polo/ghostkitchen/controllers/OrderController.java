@@ -36,6 +36,7 @@ import edu.polo.ghostkitchen.repositories.DetailRepository;
 import edu.polo.ghostkitchen.repositories.GhostsRepository;
 import edu.polo.ghostkitchen.repositories.OrderRepository;
 import edu.polo.ghostkitchen.services.CategoryService;
+import edu.polo.ghostkitchen.services.DeliveryService;
 import edu.polo.ghostkitchen.services.DetailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -63,7 +64,7 @@ public class OrderController {
     private DetailRepository detailRepository;
 
     @Autowired
-    private DetailService detailService;
+    private DeliveryService deliveryService;
 
     @Autowired
     private DishService dishService;
@@ -74,29 +75,26 @@ public class OrderController {
     }
 
     Long chefId = 0L;
-    List<Detail> cart ;
-    
+    List<Detail> cart;
+
     @GetMapping("/remito")
     public ModelAndView remito(HttpSession session) {
 
         // Recupera los objetos de la sesión
         Order order = (Order) session.getAttribute("order");
-      
-        // String fechaHoy = (String) session.getAttribute("fechaHoy");
-        
 
+        // String fechaHoy = (String) session.getAttribute("fechaHoy");
         ModelAndView modelAndView = new ModelAndView("fragments/base");
         modelAndView.addObject("titulo", "Remito");
         modelAndView.addObject("vista", "orden/remito");
+
          modelAndView.addObject("cart", cart);
          
         // Puedes agregar los objetos al modelo para usarlos en tu vista
         modelAndView.addObject("order", order);
-       modelAndView.addObject("ocultarEncabezado", true);
-       
+        modelAndView.addObject("ocultarEncabezado", true);
 
         // modelAndView.addObject("fecha", fechaHoy);
-
         return modelAndView;
     }
 
@@ -110,19 +108,18 @@ public class OrderController {
         modelAndView.addObject("allDetails", cartAdm.getDetailList());
         modelAndView.addObject("allcategory", categoryService.getAll());
         modelAndView.addObject("chefId", chefId);
-        System.out.println(chefId + "ESTE ES 0");
+        modelAndView.addObject("deliveries", deliveryService.getAll());
         return modelAndView;
     }
- @GetMapping("/finalizarRemito")
+
+    @GetMapping("/finalizarRemito")
     public String finalizarRemito(HttpSession session) {
 
         cart.clear();
         session.removeAttribute("order");
-        
 
         return "redirect:/menu";
     }
-
 
     @PostMapping("/pedido/{dishId}")
     public String addDetailToOrder(@PathVariable Long dishId, @RequestParam("cantidad") Integer cantidad,
@@ -131,7 +128,7 @@ public class OrderController {
         // Buscar el Dish en la base de datos por su ID
         Dish dish = dishService.getById(dishId);
         chefId = dish.getChef().getId();
-        System.out.println(chefId + "ESTE ES OTRO NUMERO");
+        
         if (dish != null) {
             // Crear un nuevo objeto Dish con los campos deseados
             Dish newDish = new Dish();
@@ -161,7 +158,7 @@ public class OrderController {
 
     @GetMapping("/pedido/eliminarDish/{id}")
     public String eliminarDish(@PathVariable Long id) {
-        System.out.println("ID QUE DESEO ELIMINAR DEL LIST------------------" + id);
+        
 
         // buscar el objeto que deseas eliminar por su identificación
         Detail dishToRemove = null;
@@ -216,7 +213,7 @@ public class OrderController {
 
         // Guarda los objetos en la sesión
         session.setAttribute("order", order);
-       
+
         //guardo todo lo que esta en el carrito par rellenar el remito
         cart = cartAdm.getDetailList();
         // // Obtiene la fecha actual
@@ -227,10 +224,7 @@ public class OrderController {
         // String fechaFormateada = formatoFecha.format(fechaActual);
         // // Almacena la fecha formateada en la sesión
         // session.setAttribute("fechaHoy", fechaFormateada);
-        System.out.println("------------vvvvv------------");
-        System.out.println(cart);
-        System.out.println("----------xxxxx---------------");
-
+        
         //cartAdm.limpiar();
         return "redirect:/remito"; // Redirige a la página deseada después de vaciar la lista
     }

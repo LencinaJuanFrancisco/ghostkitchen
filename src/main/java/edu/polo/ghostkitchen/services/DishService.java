@@ -76,4 +76,8 @@ public class DishService {
 
     return randomDishes;
 }
+
+    public List<Dish> getDishesByCategory(Category category) {
+        return dishRepository.findByCategory(category);
+    }
 }

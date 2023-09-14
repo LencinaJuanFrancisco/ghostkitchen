@@ -160,9 +160,25 @@ hr.my-5 {
     object-fit: cover; /* Esto asegurará que la imagen se ajuste al tamaño sin distorsionarse */
 }
 
+.custom-img2 {
+    width: 100%; /* Ajusta el ancho deseado */
+    height: 140px; /* Ajusta la altura deseada */
+   object-fit: cover; /* Esto asegurará que la imagen se ajuste al tamaño sin distorsionarse */
+}
+
 .hover-warning:hover {
     background-color: #ffc107; /* Color de fondo de advertencia de Bootstrap */
     color: #fff; /* Color de texto en hover */
     border-radius: 20px;
      font-weight: bold;
 }
+
+.custom-left-align {
+    text-align: left;
+}
+
+.modal2 {
+    z-index: 1050; /* o cualquier otro valor adecuado */
+}
+
+

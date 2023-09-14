@@ -12,6 +12,9 @@
                     <div th:if="${message}" class="alert alert-success mt-3 d-flex justify-content-center">
                         <p th:text="${message}"></p>
                     </div>
+                    <div th:if="${errorMessage}">
+                        <a class="submit" data-bs-toggle="modal" data-bs-target="#loginError"></a>
+                    </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo electrónico</label>
                         <input type="text" class="form-control" id="email" name="email">
@@ -23,6 +26,28 @@
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-dark mt-auto">Iniciar sesión</button>
                     </div>
+
+
+                    <!-- Modal -->
+
+                    <div class="modal fade" id="loginError" tabindex="-1" aria-labelledby="loginError" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-size: 24px; font-weight: bold;">Error</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <h5 class="text-center modal-title fs-5" th:text="${errorMessage}"></h5>
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
                 </form>
                 <div class="card-footer text-center p-3">
                     <a href="/register" class="text-decoration-none fw-bold h5">Todavía no tengo una cuenta</a>
@@ -33,4 +58,12 @@
 </div>
 
 <script th:fragment="script">
+</script>
+
+
+<script th:if="${errorMessage}">
+    $(document).ready(function () {
+        // Si hay un mensaje de error, mostrar el modal
+        $('#loginError').modal('show');
+    });
 </script>

@@ -39,7 +39,7 @@ public class AdminController implements WebMvcConfigurer {
         return maw;
     }
 
-    
+
     @PostMapping("/createcategory")
     public ModelAndView registrar(CategoryDto categoryDto, BindingResult br) {
         // ... Validación de otros controles de errores ...
@@ -64,6 +64,7 @@ public class AdminController implements WebMvcConfigurer {
         // Redirigir al usuario a alguna página después del registro exitoso
         return new ModelAndView("redirect:/");
     }
+
     
 @GetMapping("/dashboard/home")
 public ModelAndView dashboard() {
@@ -83,9 +84,11 @@ maw.addObject("platoMasVendido", dashboarInfo.getPlatoMasVendido());
 maw.addObject("clienteMasCompra", dashboarInfo.getClienteQueMasCompro());
  maw.addObject("chefMasVendido", dashboarInfo.getCocinaMasVendida());
 
-System.out.println("dddddddddddddddddddddddddddddddd "+  dashboarInfo.getClienteQueMasCompro()+ " vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
+
           
   return maw;
+
+   
 }
 @GetMapping("/dashboard/usuarios")
 public ModelAndView usuarios() {

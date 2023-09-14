@@ -9,141 +9,41 @@
         </div>
     </section>
 
+
     <div class="album py-5 bg-light">
-        <div class="container">
-
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">       
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img 
-                             th:src="${'/images/kitchens/chidos.jpeg'}" class="bd-placeholder-img card-img-top" alt="Imagen de la Milanesa con Papas Fritas">
-                             
-                        <div class="card-body">
-                            <p class="card-text">Milanesas con Papas Fritas: Si estás buscando una opción más sustanciosa, nuestras milanesas son ideales. Jugosas y crujientes, acompañadas de papas fritas doradas. Una combinación que te llenará de satisfacción.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a type="button" href="/dishdetail" class="btn btn-sm btn-outline-secondary">ver</a>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">pedir</button>
+        <div class="container fluid">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <div th:each="chef : ${randomChefs}" class="col-12 col-sm-6 col-md-4 col-lg-3" >
+                    <form th:action="@{/${chef.id}}" th:object="${chef}" method="POST" enctype="multipart/form-data" >
+                        <a th:href="@{'/perfil/' + ${chef.id}}" class="card shadow-sm mb-3 text-center" style="height: 400px; text-decoration: none; ">
+                            <img th:src="${'/images/chefs/' + chef.image}" class="bd-placeholder-img card-img-top" style="border: 1px solid #ccc;">
+                            <div class="card-body align-items-center">
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <span th:each="starNumber : ${#numbers.sequence(1, chef.user.rank)}">
+                                        <i class="fa-regular fa-star"></i>
+                                    </span>
+                                    <span th:if="${chef.user.rank % 1 != 0}" class="half-star">
+                                        <i class="fa-regular fa-star-half"></i>
+                                    </span>
                                 </div>
-                                <small class="text-muted">a lo pancho</small>
+                                <p class="text-muted text-center description" th:text='${chef.description}' style="overflow: hidden; text-overflow: ellipsis;"></p>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img  th:src="${'/images/kitchens/aLoPancho.png'}" class="bd-placeholder-img card-img-top" alt="Imagen de la Milanesa con Papas Fritas">
-                             <div class="card-body">
-                            <p class="card-text">Milanesas con Papas Fritas: Si estás buscando una opción más sustanciosa, nuestras milanesas son ideales. Jugosas y crujientes, acompañadas de papas fritas doradas. Una combinación que te llenará de satisfacción.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a type="button" href="/dishdetail" class="btn btn-sm btn-outline-secondary">ver</a>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">pedir</button>
-                                </div>
-                                <small class="text-muted">a lo pancho</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="https://resizer.iproimg.com/unsafe/640x/filters:format(webp)/https://assets.iprofesional.com/assets/png/2021/02/511245.png" class="bd-placeholder-img card-img-top" alt="Imagen de la Milanesa con Papas Fritas">
-                        <div class="card-body">
-                            <p class="card-text">Milanesas con Papas Fritas: Si estás buscando una opción más sustanciosa, nuestras milanesas son ideales. Jugosas y crujientes, acompañadas de papas fritas doradas. Una combinación que te llenará de satisfacción.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a type="button" href="/dishdetail" class="btn btn-sm btn-outline-secondary">ver</a>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">pedir</button>
-                                </div>
-                                <small class="text-muted">a lo pancho</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="https://resizer.iproimg.com/unsafe/640x/filters:format(webp)/https://assets.iprofesional.com/assets/png/2021/02/511245.png" class="bd-placeholder-img card-img-top" alt="Imagen de la Milanesa con Papas Fritas">
-                        <div class="card-body">
-                            <p class="card-text">Milanesas con Papas Fritas: Si estás buscando una opción más sustanciosa, nuestras milanesas son ideales. Jugosas y crujientes, acompañadas de papas fritas doradas. Una combinación que te llenará de satisfacción.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a type="button" href="/dishdetail" class="btn btn-sm btn-outline-secondary">ver</a>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">pedir</button>
-                                </div>
-                                <small class="text-muted">a lo pancho</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="https://resizer.iproimg.com/unsafe/640x/filters:format(webp)/https://assets.iprofesional.com/assets/png/2021/02/511245.png" class="bd-placeholder-img card-img-top" alt="Imagen de la Milanesa con Papas Fritas">
-                        <div class="card-body">
-                            <p class="card-text">Milanesas con Papas Fritas: Si estás buscando una opción más sustanciosa, nuestras milanesas son ideales. Jugosas y crujientes, acompañadas de papas fritas doradas. Una combinación que te llenará de satisfacción.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a type="button" href="/dishdetail" class="btn btn-sm btn-outline-secondary">ver</a>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">pedir</button>
-                                </div>
-                                <small class="text-muted">a lo pancho</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="https://resizer.iproimg.com/unsafe/640x/filters:format(webp)/https://assets.iprofesional.com/assets/png/2021/02/511245.png" class="bd-placeholder-img card-img-top" alt="Imagen de la Milanesa con Papas Fritas">
-                        <div class="card-body">
-                            <p class="card-text">Milanesas con Papas Fritas: Si estás buscando una opción más sustanciosa, nuestras milanesas son ideales. Jugosas y crujientes, acompañadas de papas fritas doradas. Una combinación que te llenará de satisfacción.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a type="button" href="/dishdetail" class="btn btn-sm btn-outline-secondary">ver</a>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">pedir</button>
-                                </div>
-                                <small class="text-muted">a lo pancho</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="https://resizer.iproimg.com/unsafe/640x/filters:format(webp)/https://assets.iprofesional.com/assets/png/2021/02/511245.png" class="bd-placeholder-img card-img-top" alt="Imagen de la Milanesa con Papas Fritas">
-                        <div class="card-body">
-                            <p class="card-text">Milanesas con Papas Fritas: Si estás buscando una opción más sustanciosa, nuestras milanesas son ideales. Jugosas y crujientes, acompañadas de papas fritas doradas. Una combinación que te llenará de satisfacción.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a type="button" href="/dishdetail" class="btn btn-sm btn-outline-secondary">ver</a>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">pedir</button>
-                                </div>
-                                <small class="text-muted">a lo pancho</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="https://resizer.iproimg.com/unsafe/640x/filters:format(webp)/https://assets.iprofesional.com/assets/png/2021/02/511245.png" class="bd-placeholder-img card-img-top" alt="Imagen de la Milanesa con Papas Fritas">
-                        <div class="card-body">
-                            <p class="card-text">Milanesas con Papas Fritas: Si estás buscando una opción más sustanciosa, nuestras milanesas son ideales. Jugosas y crujientes, acompañadas de papas fritas doradas. Una combinación que te llenará de satisfacción.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a type="button" href="/dishdetail" class="btn btn-sm btn-outline-secondary">ver</a>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">pedir</button>
-                                </div>
-                                <small class="text-muted">a lo pancho</small>
-                            </div>
-                        </div>
-                    </div>
+                        </a>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+    <style>
+        .description {
+            max-height: 100px; /* Límite de altura de 150px */
+            overflow: hidden;
+            text-overflow: ellipsis; /* Agrega puntos suspensivos (...) si se trunca el texto */
+        }
+    </style>
 
-<div th:fragment="script">
-  
-</div>
+    <div th:fragment="script">
+
+    </div>
 

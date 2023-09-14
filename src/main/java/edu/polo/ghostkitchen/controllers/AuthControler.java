@@ -60,24 +60,34 @@ public class AuthControler {
         //Se limpia el carrito 
         cartAdm.limpiar();
         
+        
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
         maw.addObject("titulo", "Iniciar sesión");
         maw.addObject("vista", "auth/login");
-        model.addAttribute("error", error);
-        model.addAttribute("logout", logout);
-        maw.addObject("allcategory", categoryService.getAll());
-
+//        model.addAttribute("error", error);
+        
+        
+        if (error != null) {
+            
+        maw.addObject("errorMessage", "Correo electrónico o contraseña incorrectos.");
+    }
+        
+        
+        
+        
 //        String username = SecurityContextHolder.getContext().getAuthentication().getName();
 //        Ghosts user = userRepository.findByUsername(username);
 //        session.setAttribute("usuario", user);
 //          System.out.println(user + "Y ESTO ES SESION: " + session);
-//    
+        model.addAttribute("logout", logout);
+        maw.addObject("allcategory", categoryService.getAll());
+
         return maw;
     }
 
     @GetMapping({"/loginSuccess"})
-    public RedirectView logincheck() {
+    public RedirectView logincheck() {    
         return new RedirectView("/");
     }
 

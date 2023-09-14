@@ -23,24 +23,25 @@ public class SecurityConfiguration {
     }
 
     @Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http
-			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/","/categories", "/home","/pedido/**","/finalizarRemito" ,"/vaciarLista","/menu"
-                                        ,"/register","/dishdetail","/createDish", "/createcategory","/perfil","/perfil/**","/registerKitchen"
-                                        , "/registerDelivery","/dashboard/home","/dashboard/usuarios","/createOrden" ,"/remito", "/css/**", "/images/**", "/images/dishes/**", "/images/kitchens/**")
-				.permitAll()
-				.anyRequest().authenticated()
-			)
-			.formLogin((form) -> form
-				.loginPage("/login")
-				.loginProcessingUrl("/logincheck")
-				.usernameParameter("email")
-				.passwordParameter("password")
-				.permitAll()
-			)
-			.logout((logout) -> logout.permitAll());
-
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests((requests) -> requests
+                .requestMatchers("/", "/categories", "/home", "/pedido/**", "/finalizarRemito", "/vaciarLista", "/menu",
+                         "/register", "/dishdetail", "/createDish", "/createcategory", "/perfil", "/perfilChef","/perfil/**", "/registerKitchen",
+                         "/registerDelivery","/dashboard/home","/dashboard/usuarios", "/createOrden", "/remito", "/css/**", "/images/**", "/images/dishes/**", "/images/chefs/**", "/images/kitchens/**")
+                .permitAll()
+                .anyRequest().authenticated()
+                )
+                .formLogin((form) -> form
+                .loginPage("/login")
+                .loginProcessingUrl("/logincheck")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .failureUrl("/login?error=true")
+                .permitAll()
+                )
+                .logout((logout) -> logout.permitAll());
+      
         return http.build();
 
     }

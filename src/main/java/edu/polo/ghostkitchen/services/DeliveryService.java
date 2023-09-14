@@ -2,6 +2,7 @@ package edu.polo.ghostkitchen.services;
 
 import edu.polo.ghostkitchen.entidades.*;
 import edu.polo.ghostkitchen.repositories.*;
+import java.util.List;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,10 @@ public class DeliveryService {
 
     public Delivery getByLicencePlate(String licencePlate) {
         return deliveryRepository.findByLicencePlate(licencePlate);
+    }
+    
+     public List<Delivery> getAll() {
+        return (List<Delivery>) deliveryRepository.findAll();
     }
 
 }

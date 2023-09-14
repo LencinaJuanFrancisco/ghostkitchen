@@ -7,7 +7,7 @@
                         Registro de Cocina Fantasma
                     </div>
                 </div>
-                <form class="card-body" th:action="@{/registerKitchen}" th:object="${registerKitchenDto}" method="POST">
+                <form class="card-body" th:action="@{/registerKitchen}" th:object="${registerKitchenDto}" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <div class="mb-3">
                         <label for="name" class="form-label">Nombre</label>
@@ -44,10 +44,20 @@
                         <input type="text" class="form-control" id="web" name="web">
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('web')}" th:errors="*{web}"></div>
                     </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="description" name="description"></textarea>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+                    </div>
                     <div class="mb-3">
                         <label for="schedules" class="form-label">Horarios</label>
                         <input type="text" class="form-control" id="schedules" name="schedules">
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('schedules')}" th:errors="*{schedules}"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Logo</label>
+                        <input type="file" class="form-control" id="image" name="image">
                     </div>
                     <div class="row mb-3">
                         <div class="g-recaptcha col-12 d-flex justify-content-center" name="recaptcha" th:field="*{recaptcha}" th:errorClass="'is-invalid'" data-sitekey="6Lei5sYnAAAAAHXHjR7XsminVO1xRO_aiwcJhsFs"></div>
