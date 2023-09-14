@@ -5,6 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import ch.qos.logback.core.net.server.Client;
+import edu.polo.ghostkitchen.entidades.Chef;
+import edu.polo.ghostkitchen.entidades.Dish;
+import edu.polo.ghostkitchen.entidades.Ghosts;
 import edu.polo.ghostkitchen.repositories.ChefRepository;
 import edu.polo.ghostkitchen.repositories.ClientRepository;
 import edu.polo.ghostkitchen.repositories.DeliveryRepository;
@@ -12,6 +16,7 @@ import edu.polo.ghostkitchen.repositories.DetailRepository;
 import edu.polo.ghostkitchen.repositories.DishRepository;
 import edu.polo.ghostkitchen.repositories.GhostsRepository;
 import edu.polo.ghostkitchen.repositories.OrderRepository;
+
 
 @Controller
 public class DashboarInfo {
@@ -72,29 +77,66 @@ public class DashboarInfo {
         return dishRepository.count();
     }
 
+  
     public Object[] getPlatoMasVendido() {
         List<Object[]> result = detailRepository.platoMasVendido();
         if (!result.isEmpty()) {
-            return result.get(0);
+            Object[] platoMasVendido = result.get(0);
+            Long platoId = (Long) platoMasVendido[0]; // 
+            Dish plato = dishRepository.findById(platoId).orElse(null);
+            if (plato != null) {
+                platoMasVendido[0] = plato.getName(); // Reemplaza el ID del plato con el nombre
+                return platoMasVendido;
+            }
         }
         return null;
     }
+    
     
     public Object[] getCocinaMasVendida() {
         List<Object[]> result = orderRepository.chefMasOrdenes();
         if (!result.isEmpty()) {
-            return result.get(0);
+            Object[] cocinaMasVendida = result.get(0);
+            Long cocinaId = (Long) cocinaMasVendida[0]; // Supongo que el ID de la cocina está en la posición 0
+            Chef cocina = chefRepository.findById(cocinaId).orElse(null);
+            if (cocina != null) {
+                cocinaMasVendida[0] = cocina.getUser().getName(); // Reemplaza el ID de la cocina con el nombre
+                return cocinaMasVendida;
+            }
+        }
+        return null;
+    }
+      
+    
+    
+    
+    
+    
+    // public Object[] getClienteQueMasCompro() {
+    //     List<Object[]> result = orderRepository.clienteMasCompro();
+    //     if (!result.isEmpty()) {
+    //         return result.get(0);
+    //     }
+    //     return null;
+    // }
+    public Object[] getClienteQueMasCompro() {
+        List<Object[]> result = orderRepository.clienteMasCompro();
+        if (!result.isEmpty()) {
+            Object[] clienteQueMasCompro = result.get(0);
+            Long clienteId = (Long) clienteQueMasCompro[0]; 
+            Ghosts cliente = ghostsRepository.findById(clienteId).orElse(null);
+            if (cliente != null) {
+                clienteQueMasCompro[0] = cliente.getName(); // Reemplaza el ID del cliente con el nombre
+                return clienteQueMasCompro;
+            }
         }
         return null;
     }
     
-    public Object[] getClienteQueMasCompro() {
-        List<Object[]> result = orderRepository.clienteMasCompro();
-        if (!result.isEmpty()) {
-            return result.get(0);
-        }
-        return null;
-    }
+    
+    
+    
+    
 
     // catidaded de ordenes
     // la longitud del array

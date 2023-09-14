@@ -2,22 +2,28 @@
 
 <div class="container mt-5" th:fragment="contenido">
     <div class="row">
+        
         <div class="col-md-4 col-xl-3">
             <div class="cardBoard bg-c-blue order-card">
                 <div class="card-block">
                     <h6 class="m-b-20 text-white">Ordenes</h6>
                     <h2 class="text-right text-warning">
-                      <i class="fa fa-cart-plus f-left text-warning" ></i><span text-warning th:text="${ordenes}"></span></h2>
+                      <i class="fa fa-cart-plus  text-warning" ></i>
+                      <span class="text-warning" style="float: right;"  th:text="${ordenes}"></span>
+                    </h2>
                     
                 </div>
             </div>
         </div>
-        
+
         <div class="col-md-4 col-xl-3">
             <div class="cardBoard bg-c-blue order-card">
                 <div class="card-block">
                     <h6 class="m-b-20 text-white">Total Ventas</h6>
-                    <h2 class="text-right text-warning"><i class="fa fa-rocket f-left text-warning"></i><span class="text-white" th:text="'$ '+${totalVentas}"></span></h2>
+                    <h2 class="text-right text-warning">
+                        <i class="fa fa-rocket text-warning"></i>
+                        <span class="text-warning" style="float: right;" th:text="'$ '+${totalVentas}"></span>
+                    </h2>
                     
                 </div>
             </div>
@@ -27,7 +33,7 @@
             <div class="cardBoard bg-c-blue order-card">
                 <div class="card-block">
                     <h6 class="m-b-20 text-warning">Ganancias</h6>
-                    <h2 class="text-right text-warning"><i class="fa-solid fa-sack-dollar f-left text-warning"></i><span text-warning th:text="'$ '+${ganancias}"></span></h2>
+                    <h2 class="text-right text-warning"><i class="fa-solid fa-sack-dollar  text-warning"></i><span class="text-white" style="float: right;" th:text="'$ '+${ganancias}"></span></h2>
                     
                 </div>
             </div>
@@ -37,7 +43,7 @@
             <div class="cardBoard bg-c-blue order-card">
                 <div class="card-block">
                     <h6 class="m-b-20 text-warning">Clientes totales</h6>
-                    <h2 class="text-right text-warning"><i class="fa-solid fa-users f-left text-warning"></i><span text-warning th:text="${clientesTotales}"></span></h2>
+                    <h2 class="text-right text-warning"><i class="fa-solid fa-users  text-warning"></i><span class="text-white" style="float: right;" th:text="${clientesTotales}"></span></h2>
                   
                 </div>
             </div>
@@ -46,7 +52,7 @@
           <div class="cardBoard bg-c-blue order-card">
               <div class="card-block">
                   <h6 class="m-b-20 text-warning">Compradores</h6>
-                  <h2 class="text-right text-warning"><i class="fa-solid fa-user-tag f-left text-warning"></i><span text-warning th:text="${compradores}"></span></h2>
+                  <h2 class="text-right text-warning"><i class="fa-solid fa-user-tag  text-warning"></i><span class="text-white" style="float: right;" th:text="${compradores}"></span></h2>
                   
               </div>
           </div>
@@ -56,7 +62,7 @@
             <div class="card-block">
                 <h6 class="m-b-20 text-warning">Cocinas</h6>
               
-                <h2 class="text-right text-warning"><i class="fa-solid fa-kitchen-set f-left text-warning"></i><span text-warning th:text="${cocinas}"></span></h2>
+                <h2 class="text-right text-warning"><i class="fa-solid fa-kitchen-set  text-warning"></i><span class="text-white" style="float: right;" th:text="${cocinas}"></span></h2>
             </div>
         </div>
     </div>
@@ -64,7 +70,7 @@
       <div class="cardBoard bg-c-blue order-card">
           <div class="card-block">
               <h6 class="m-b-20 text-warning">Deliveries</h6>
-               <h2 class="text-right text-warning"><i class="fa-solid fa-motorcycle f-left text-warning"></i><span text-warning th:text="${deliveries}"></span></h2>
+               <h2 class="text-right text-warning"><i class="fa-solid fa-motorcycle  text-warning"></i><span class="text-white" style="float: right;" th:text="${deliveries}"></span></h2>
            
           </div>
       </div>
@@ -73,7 +79,7 @@
     <div class="cardBoard bg-c-blue order-card">
         <div class="card-block">
             <h6 class="m-b-20 text-warning">Cantidad de platos</h6>
-            <h2 class="text-right text-warning"><i class="fa-solid fa-utensils f-left text-warning"></i><span text-warning th:text="${cantidadDePlatos}"></span></h2>
+            <h2 class="text-right text-warning"><i class="fa-solid fa-utensils  text-warning"></i><span class="text-white" style="float: right;" th:text="${cantidadDePlatos}"></span></h2>
             
         </div>
     </div>
@@ -82,7 +88,7 @@
   <div class="cardBoard bg-c-blue order-card">
       <div class="card-block">
           <h6 class="m-b-20 text-warning">Palto mas vendido</h6>
-          <h2 class="text-right text-warning"><i class="fa-solid fa-utensils f-left text-warning"></i><span text-warning th:text="${platoMasVendido[1]}"></span></h2>
+          <h2 class="text-right text-warning"><i class="fa-solid fa-utensils  text-warning"></i><span class="text-white" style="float: right;" th:text="${platoMasVendido[1] + ' unidades'}"></span></h2>
           <p>este es el id del plato que mas vendio <span th:text="${platoMasVendido[0]}"></span></p>
       </div>
   </div>
@@ -91,7 +97,7 @@
   <div class="cardBoard bg-c-blue order-card">
       <div class="card-block">
           <h6 class="m-b-20 text-warning">Chef con mas ventas</h6>
-          <h2 class="text-right text-warning"><i class="fa-solid fa-utensils f-left text-warning"></i><span text-warning th:text="${chefMasVendido[1]}"></span> vta</h2>
+          <h2 class="text-right text-warning"><i class="fa-solid fa-utensils  text-warning"></i><span class="text-white" style="float: right;"  th:text="${chefMasVendido[1] + ' ventas'}"></span></h2>
           <p>este es el id del chef que mas vendio <span th:text="${chefMasVendido[0]}"></span></p>
       </div>
   </div>
@@ -100,7 +106,8 @@
   <div class="cardBoard bg-c-blue order-card">
       <div class="card-block">
           <h6 class="m-b-20 text-warning">Usuario con mas compras</h6>
-          <h2 class="text-right text-warning"><i class="fa-solid fa-utensils f-left text-warning"></i><span text-warning th:text="${clienteMasCompra[1]}"></span></h2>
+          <h2 class="text-right text-warning"><i class="fa-solid fa-utensils  text-warning"></i>
+            <span class="text-white" style="float: right;" th:text="${clienteMasCompra[1] + ' compras'}"></span></h2>
           <p>este es el id del cliente que mas vendio <span th:text="${clienteMasCompra[0]}"></span></p>
           
       </div>

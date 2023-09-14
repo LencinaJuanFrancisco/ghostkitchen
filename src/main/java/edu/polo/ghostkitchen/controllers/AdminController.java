@@ -81,6 +81,14 @@ public class AdminController implements WebMvcConfigurer {
         maw.addObject("clienteMasCompra", dashboarInfo.getClienteQueMasCompro());
         maw.addObject("chefMasVendido", dashboarInfo.getCocinaMasVendida());
 
+//            System.out.println("ttttttttttttttttttttttttttttttttttttttt");
+//            Object[] arreglo = dashboarInfo.getClienteQueMasCompro();
+// for (int i = 0; i < arreglo.length; i++) {
+//     Object elemento = arreglo[i];
+    
+//     System.out.println(elemento.toString());
+// }
+// System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
         Thread.sleep(1000);
 
         return maw;
