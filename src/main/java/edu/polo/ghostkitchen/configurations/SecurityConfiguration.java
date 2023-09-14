@@ -27,8 +27,8 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/", "/categories", "/home", "/pedido/**", "/finalizarRemito", "/vaciarLista", "/menu",
-                         "/register", "/dishdetail", "/createDish", "/createcategory", "/perfil", "/perfilChef", "/registerKitchen",
-                         "/registerDelivery", "/createOrden", "/remito", "/css/**", "/images/**", "/images/dishes/**", "/images/chefs/**")
+                         "/register", "/dishdetail", "/createDish", "/createcategory", "/perfil", "/perfilChef","/perfil/**", "/registerKitchen",
+                         "/registerDelivery","/dashboard/home","/dashboard/usuarios", "/createOrden", "/remito", "/css/**", "/images/**", "/images/dishes/**", "/images/chefs/**", "/images/kitchens/**")
                 .permitAll()
                 .anyRequest().authenticated()
                 )
@@ -41,7 +41,7 @@ public class SecurityConfiguration {
                 .permitAll()
                 )
                 .logout((logout) -> logout.permitAll());
-
+      
         return http.build();
 
     }

@@ -87,7 +87,9 @@ public class OrderController {
         ModelAndView modelAndView = new ModelAndView("fragments/base");
         modelAndView.addObject("titulo", "Remito");
         modelAndView.addObject("vista", "orden/remito");
-        modelAndView.addObject("cart", cart);
+
+         modelAndView.addObject("cart", cart);
+         
         // Puedes agregar los objetos al modelo para usarlos en tu vista
         modelAndView.addObject("order", order);
         modelAndView.addObject("ocultarEncabezado", true);

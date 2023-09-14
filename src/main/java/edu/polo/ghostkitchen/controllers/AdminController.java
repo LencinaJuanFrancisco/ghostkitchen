@@ -1,6 +1,7 @@
 package edu.polo.ghostkitchen.controllers;
 
 import edu.polo.ghostkitchen.classes.CartAdm;
+import edu.polo.ghostkitchen.classes.DashboarInfo;
 import edu.polo.ghostkitchen.entidades.Category;
 import edu.polo.ghostkitchen.repositories.CategoryRepository;
 import edu.polo.ghostkitchen.dto.CategoryDto;
@@ -16,6 +17,9 @@ public class AdminController implements WebMvcConfigurer {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private DashboarInfo dashboarInfo;
 
     @Autowired
     private CategoryValidator categoryValidator;
@@ -35,7 +39,7 @@ public class AdminController implements WebMvcConfigurer {
         return maw;
     }
 
-  
+
     @PostMapping("/createcategory")
     public ModelAndView registrar(CategoryDto categoryDto, BindingResult br) {
         // ... Validación de otros controles de errores ...
@@ -60,5 +64,39 @@ public class AdminController implements WebMvcConfigurer {
         // Redirigir al usuario a alguna página después del registro exitoso
         return new ModelAndView("redirect:/");
     }
+
+    
+@GetMapping("/dashboard/home")
+public ModelAndView dashboard() {
+   ModelAndView maw = new ModelAndView();
+    maw.setViewName("fragments/base");
+     maw.addObject("titulo","Dashboar");
+    maw.addObject("vista","fragments/homeDash");
+  maw.addObject("ordenes", dashboarInfo.getCantidadDeOrdenes());
+  maw.addObject("totalVentas", dashboarInfo.getTotalDeVentas());
+  maw.addObject("ganancias", dashboarInfo.getGanancia());
+   maw.addObject("clientesTotales", dashboarInfo.getCantidadDeUsuarios());
+  maw.addObject("compradores", dashboarInfo.getCantidadDeCompradores());
+maw.addObject("cocinas", dashboarInfo.getCantidadDeCocineros());
+maw.addObject("deliveries", dashboarInfo.getCantidadDeDelivery());
+maw.addObject("cantidadDePlatos", dashboarInfo.getCantidadDePlatos());
+maw.addObject("platoMasVendido", dashboarInfo.getPlatoMasVendido());
+maw.addObject("clienteMasCompra", dashboarInfo.getClienteQueMasCompro());
+ maw.addObject("chefMasVendido", dashboarInfo.getCocinaMasVendida());
+
+
+          
+  return maw;
+
    
+}
+@GetMapping("/dashboard/usuarios")
+public ModelAndView usuarios() {
+   
+   ModelAndView maw = new ModelAndView();
+   maw.setViewName("fragments/homeDash");
+     maw.addObject("titulo","Categorias");
+   maw.addObject("dash", "fragments/usuarioDash"); // Ubicación completa del fragmento
+   return maw;
+}
 }

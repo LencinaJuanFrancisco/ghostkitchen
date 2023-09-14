@@ -12,5 +12,8 @@ public interface ChefRepository extends CrudRepository<Chef, Long> {
     
      @Query(value = "SELECT * FROM chef WHERE user_id = ?1", nativeQuery = true)
     Chef findChefsByUserId(Long userId);
+
+    @Query("SELECT COUNT(*) FROM Chef")
+int countChefs();
     
 }
