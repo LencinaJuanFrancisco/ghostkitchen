@@ -40,4 +40,6 @@ public class Dish {
 
     @OneToMany(mappedBy = "dish")
     Set<Detail> details;
+
+   
 }

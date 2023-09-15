@@ -105,4 +105,10 @@ public class DishService {
             throw new IllegalArgumentException("El plato a actualizar no existe en la base de datos.");
         }
     }
-}
+
+    public void delete(Long dishId) {
+
+        dishRepository.deleteById(dishId);
+    }
+ }
+
