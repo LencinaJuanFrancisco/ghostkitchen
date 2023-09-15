@@ -1,16 +1,20 @@
 package edu.polo.ghostkitchen.controllers;
 
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
+//import com.twilio.Twilio;
+//import com.twilio.rest.api.v2010.account.Message;
+//import com.twilio.type.PhoneNumber;
 
 import edu.polo.ghostkitchen.classes.CartAdm;
 import edu.polo.ghostkitchen.entidades.Detail;
 import edu.polo.ghostkitchen.entidades.Order;
+
 import edu.polo.ghostkitchen.services.WhatsAppService;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
+
+//import edu.polo.ghostkitchen.services.WhatsAppService;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,10 +31,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/pedidos")
 public class PedidoController {
 
+
     @Autowired
     private WhatsAppService whatsAppService;
     @Autowired
     private CartAdm cartAdm;
+
+//    @Autowired
+//    private WhatsAppService whatsAppService;
+
 
     @GetMapping("/enviarMensaje")
     public String crearPedido(HttpSession session) throws InterruptedException {

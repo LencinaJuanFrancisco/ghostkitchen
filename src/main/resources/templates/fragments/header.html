@@ -15,11 +15,11 @@
                         <li class="nav-item">
                             <a class="nav-link active hover-warning" aria-current="page" href="/menu">Menú</a>
                         </li>
-                       
-                          <li class="nav-item" sec:authorize="hasRole('ROLE_Cliente') or hasRole('ROLE_Delivery')">
+
+                        <li class="nav-item" sec:authorize="hasRole('ROLE_Cliente') or hasRole('ROLE_Delivery')">
                             <a class="nav-link active hover-warning" aria-current="page" href="/perfil">Perfil</a>
                         </li>
-                         <li class="nav-item" sec:authorize="hasRole('ROLE_Chef')">
+                        <li class="nav-item" sec:authorize="hasRole('ROLE_Chef')">
                             <a class="nav-link active hover-warning" aria-current="page" href="/perfilChef">Perfil</a>
                         </li>
                         </li>
@@ -38,33 +38,35 @@
                                 <li><a class="dropdown-item" href="createcategory" sec:authorize="hasRole('ROLE_Chef') or hasRole('ROLE_Administrador')">Añadir categoría</a></li>
                             </ul>
                         </li>
+                        <li class="nav-item" sec:authorize="hasRole('ROLE_Administrador')">
+                            <a class="nav-link active hover-warning" aria-current="page" href="/dashboard/home">Dashboard</a>
+                        </li>
 
 
 
 
-                        
                     </ul>
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item" sec:authorize="isAnonymous()">
-                            <a class="nav-link active hover-warning" aria-current="page" href="/login" style="font-weight: bold">
-                                <i class="fa-solid fa-right-to-bracket" ></i> Iniciar sesión
-                            </a>
-                        </li>
-                        <li class="nav-item" sec:authorize="isAnonymous()">
-                            <a class="nav-link active hover-warning" aria-current="page" href="/register" style="font-weight: bold">
-                                <i class="fa-solid fa-user-plus"></i> Registrarse
-                            </a>
-                        </li>
+                    <a class="nav-link active hover-warning" aria-current="page" href="/login" style="font-weight: bold">
+                        <i class="fa-solid fa-right-to-bracket" ></i> Iniciar sesión
+                    </a>
+                </li>
+                <li class="nav-item" sec:authorize="isAnonymous()">
+                    <a class="nav-link active hover-warning" aria-current="page" href="/register" style="font-weight: bold">
+                        <i class="fa-solid fa-user-plus"></i> Registrarse
+                    </a>
+                </li>
                 <li class="nav-item ms-auto" sec:authorize="isAuthenticated()">
                     <form class="form-inline" th:action="@{/logout}" method="POST">
-                       
-                            
-                            <button type="button" class="btn btn-link nav-link active hover-warning text-white" style="font-weight: bold" data-bs-toggle="modal" th:data-bs-target="'#logout'">
-                                           <i class="fa-solid text-white fa-right-from-bracket" ></i> Cerrar sesión
-                                        </button>
-                            
-                         <!-- Modal -->
+
+
+                        <button type="button" class="btn btn-link nav-link active hover-warning text-white" style="font-weight: bold" data-bs-toggle="modal" th:data-bs-target="'#logout'">
+                            <i class="fa-solid text-white fa-right-from-bracket" ></i> Cerrar sesión
+                        </button>
+
+                        <!-- Modal -->
                         <div class="modal fade" th:id="'logout'" tabindex="-1" aria-labelledby="'exampleModalLabel'" aria-hidden="true" >
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
@@ -73,11 +75,11 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                    
-                                       
+
+
                                         <h5 style=" font-size: 1.2em;">
                                             ¿Seguro que desea cerrar sesión?</h5>
-                                        
+
                                     </div>
                                     <div class="modal-footer">
 
@@ -86,7 +88,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                     </form>
                 </li>
                 <li class="nav-item position-relative custom-margin-right" sec:authorize="hasRole('ROLE_Chef') or hasRole('ROLE_Administrador') or hasRole('ROLE_Cliente') or hasRole('ROLE_Delivery')">
@@ -101,8 +103,8 @@
                         </span>
                     </a>
                 </li>
-               
-                
+
+
             </ul>
         </div>
     </div>
