@@ -213,19 +213,12 @@ public class OrderController {
 
         // Guarda los objetos en la sesión
         session.setAttribute("order", order);
-
+        
         //guardo todo lo que esta en el carrito par rellenar el remito
         cart = cartAdm.getDetailList();
-        // // Obtiene la fecha actual
-        // Date fechaActual = new Date(0,0,0);
-        // // Define el formato deseado para la fecha
-        // SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-        // // Formatea la fecha actual en el formato "dd/MM/yyyy"
-        // String fechaFormateada = formatoFecha.format(fechaActual);
-        // // Almacena la fecha formateada en la sesión
-        // session.setAttribute("fechaHoy", fechaFormateada);
+       
+
         
-        //cartAdm.limpiar();
         return "redirect:/remito"; // Redirige a la página deseada después de vaciar la lista
     }
 
