@@ -67,7 +67,7 @@ public class AdminController implements WebMvcConfigurer {
     public ModelAndView dashboard() throws InterruptedException {
         ModelAndView maw = new ModelAndView();
         maw.setViewName("fragments/base");
-        maw.addObject("titulo", "Dashboar");
+        maw.addObject("titulo", "Dashboard");
         maw.addObject("vista", "fragments/homeDash");
         maw.addObject("ordenes", dashboarInfo.getCantidadDeOrdenes());
         maw.addObject("totalVentas", dashboarInfo.getTotalDeVentas());
@@ -85,11 +85,12 @@ public class AdminController implements WebMvcConfigurer {
 //            Object[] arreglo = dashboarInfo.getClienteQueMasCompro();
 // for (int i = 0; i < arreglo.length; i++) {
 //     Object elemento = arreglo[i];
-    
+//    
 //     System.out.println(elemento.toString());
 // }
 // System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-        Thread.sleep(1000);
+      
+Thread.sleep(800);
 
         return maw;
 
