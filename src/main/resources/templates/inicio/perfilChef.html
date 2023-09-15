@@ -113,8 +113,24 @@
                                         <h6 class="text-success">Envío bonificado</h6>
                                         <div class="d-flex flex-column mt-4">
 
-                                            <button type="button" class="btn btn-dark mt-auto mb-2" data-bs-toggle="modal" th:data-bs-target="'#exampleModal2' + ${stat.index}">Detalles</button>
-                                            <a th:href="@{'/editDish/' + ${di.id}}" class="btn btn-dark mt-auto mb-2">Editar</a>
+                                            <button type="button" class="btn btn-secondary mt-auto mb-1" data-bs-toggle="modal" th:data-bs-target="'#exampleModal2' + ${stat.index}">Detalles</button>
+
+
+
+                                            <div class="d-flex justify-content-between ">
+
+
+
+
+
+                                                <a th:href="@{'/editDish/' + ${di.id}}" class="btn btn-dark mt-auto">Editar</a>
+
+                                                <button type="button" class="btn btn-warning mt-auto" data-bs-toggle="modal" th:data-bs-target="'#exampleModal3' + ${stat.index}">
+                                                    <i class="fa-solid text-white fa-trash-can"></i>
+                                                </button>
+
+                                            </div>
+
                                             <button type="button" class="btn btn-outline-dark mt-auto" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${stat.index}" sec:authorize="hasRole('ROLE_Cliente')">
                                                 Pedir
                                             </button>
@@ -168,7 +184,33 @@
                                 </div>
                             </div>
 
+                            <div class="modal fade" th:id="'exampleModal3' + ${stat.index}" tabindex="-1" aria-labelledby="'exampleModalLabel' + ${stat.index}" aria-hidden="true" >
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-size: 20px; font-weight: bold;" th:text="'¿Seguro que desea eliminar ' + ${di.name} + ' ?'"></h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            <a class="btn btn-dark centered-content" th:href="@{'/deleteDish/' + ${di.id}}">
+                                               Aceptar
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
                         </form>
+
+
+
+
+
+
+
+
+
                     </div>
                 </div>
 

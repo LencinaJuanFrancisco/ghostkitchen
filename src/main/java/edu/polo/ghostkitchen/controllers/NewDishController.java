@@ -18,11 +18,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -154,15 +156,28 @@ public class NewDishController {
     public String guardarCambios(@PathVariable Long dishId, @ModelAttribute("dish") Dish dish) {
         // Aquí debes actualizar la información del plato en la base de datos
         // Utiliza el objeto 'dish' para acceder a los datos del formulario
-         Dish dishToUpdate = dishService.getById(dishId); // Obtén el plato actual de la base de datos
-         dishToUpdate.setName(dish.getName()); // Actualiza los campos necesarios
-         dishToUpdate.setPrice(dish.getPrice());
-         dishToUpdate.setDescription(dish.getDescription());
-         dishToUpdate.setCategory(dish.getCategory());
+        Dish dishToUpdate = dishService.getById(dishId); // Obtén el plato actual de la base de datos
+        dishToUpdate.setName(dish.getName()); // Actualiza los campos necesarios
+        dishToUpdate.setPrice(dish.getPrice());
+        dishToUpdate.setDescription(dish.getDescription());
+        dishToUpdate.setCategory(dish.getCategory());
         dishToUpdate.setDisponibility(dish.isDisponibility());
-         dishService.update(dishToUpdate); // Actualiza el plato en la base de datos
+        dishService.update(dishToUpdate); // Actualiza el plato en la base de datos
 
         // Redirecciona a la página principal o a donde desees después de guardar los cambios
         return "redirect:/";
+    }
+
+    @GetMapping("/deleteDish/{dishId}")
+    public String borrarPlato(@PathVariable Long dishId) {
+        // Aquí debes actualizar la información del plato en la base de datos
+        // Utiliza el objeto 'dish' para acceder a los datos del formulario
+//         Dish dishToUpdate = dishService.getById(dishId); // Obtén el plato actual de la base de datos
+
+        dishService.delete(dishId);
+
+//        dishToUpdate.dele; // Actualiza el plato en la base de datos
+        // Redirecciona a la página principal o a donde desees después de guardar los cambios
+        return "redirect:/perfilChef";
     }
 }
