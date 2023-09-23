@@ -353,7 +353,7 @@
           <div class="card-block">
             <h6 class="m-b-20 text-warning">Platos vendidos</h6>
             <h2 class="text-right text-warning">
-              <i class="fa fa-cart-plus text-warning"></i>
+              <i class="fa-solid fa-utensils text-warning"></i>
               <span
                 class="text-warning"
                 style="float: right"
@@ -369,7 +369,7 @@
           <div class="card-block">
             <h6 class="m-b-20 text-warning">Plato MAS vendido</h6>
             <h2 class="text-right text-warning">
-              <i class="fa fa-cart-plus text-warning"></i>
+              <i class="fa-solid fa-plus text-warning"></i>
               <span
                 class="text-warning"
                 style="float: right"
@@ -386,7 +386,7 @@
           <div class="card-block">
             <h6 class="m-b-20 text-warning">Plato MENOS vendido</h6>
             <h2 class="text-right text-warning">
-              <i class="fa fa-cart-plus text-warning"></i>
+              <i class="fa-solid fa-minus text-warning"></i>
               <span
                 class="text-warning"
                 style="float: right"
@@ -403,7 +403,7 @@
           <div class="card-block">
             <h6 class="m-b-20 text-warning">Plato mejor Rankin</h6>
             <h2 class="text-right text-warning">
-              <i class="fa fa-cart-plus text-warning"></i>
+              <i  class="fa-regular fa-thumbs-up text-warning"></i>
               <span
                 class="text-warning"
                 style="float: right"
@@ -420,7 +420,7 @@
           <div class="card-block">
             <h6 class="m-b-20 text-warning">Plato Menor Ranking</h6>
             <h2 class="text-right text-warning">
-              <i class="fa fa-cart-plus text-warning"></i>
+              <i class="fa-regular fa-thumbs-down text-warning"></i>
               <span
                 class="text-warning"
                 style="float: right"
@@ -437,7 +437,7 @@
           <div class="card-block">
             <h6 class="m-b-20 text-warning">Raking Promedio</h6>
             <h2 class="text-right text-warning">
-              <i class="fa fa-cart-plus text-warning"></i>
+              <i class="fa-solid fa-medal text-warning"></i>
               <span
                 class="text-warning"
                 style="float: right"
@@ -453,7 +453,7 @@
           <div class="card-block">
             <h6 class="m-b-20 text-warning">Total de ventas</h6>
             <h2 class="text-right text-warning">
-              <i class="fa fa-cart-plus text-warning"></i>
+              <i  class="fa-solid fa-calculator text-warning"></i>
               <span
                 class="text-warning"
                 style="float: right"
@@ -495,9 +495,18 @@
     };
 
     var ctx = document.getElementById('pieChart').getContext('2d');
+    
     var pieChart = new Chart(ctx, {
-        type: 'pie',
-        data: pieChartData
+        type: 'doughnut',  // Cambiado a tipo de gráfico de dona
+        data: pieChartData,
+        options: {
+            plugins: {
+                labels: {
+                    render: 'percentage',  // Mostrar porcentaje en las secciones
+                    precision: 2  // Precisión del porcentaje
+                }
+            }
+        }
     });
 
     /* Si necesitas recrear el gráfico, primero destrúyelo */
