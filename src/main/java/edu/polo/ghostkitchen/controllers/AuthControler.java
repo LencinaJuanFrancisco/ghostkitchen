@@ -55,7 +55,7 @@ public class AuthControler {
     @GetMapping("/login")
     public ModelAndView showLoginForm(HttpSession session, Model model,
             @RequestParam(name = "error", required = false) String error,
-            @RequestParam(name = "logout", required = false) String logout) {
+            @RequestParam(name = "logout", required = false) String logout) throws InterruptedException {
 
         //Se limpia el carrito 
         cartAdm.limpiar();
@@ -87,7 +87,8 @@ public class AuthControler {
     }
 
     @GetMapping({"/loginSuccess"})
-    public RedirectView logincheck() {    
+    public RedirectView logincheck() throws InterruptedException {  
+        Thread.sleep(1000);
         return new RedirectView("/");
     }
 
